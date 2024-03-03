@@ -7,6 +7,8 @@ import { CreatePost } from "~/app/_components/create-post";
 import { getServerAuthSession } from "~/server/auth";
 import { api } from "~/trpc/server";
 import Navbar from "./_components/navbar";
+import Hero from "./_components/hero";
+import Buttons from "./_components/buttons";
 
 export default async function Home() {
   noStore();
@@ -17,9 +19,12 @@ export default async function Home() {
     <main className=" min-h-screen  bg-zinc-900">
       <div className=" flex flex-col items-center">
         <Navbar />
-        <Image src={placeholder} alt="cat" className="w-5/6"></Image>
-        <div className="text-white">hero dog image</div>
-        <div className="text-white">buttons</div>
+        <Hero />
+        {
+          //<Image src={placeholder} alt="cat" className="w-5/6"></Image>
+        }
+
+        <Buttons />
         <div className="text-white">animal gallery</div>
         <div className="text-white">join us</div>
         <div className="text-white">news</div>

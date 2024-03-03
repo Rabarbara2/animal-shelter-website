@@ -3,7 +3,7 @@ import Link from "next/link";
 import LogoHeader from "../assets/logo-header";
 export default function Navbar() {
   return (
-    <div className="absolute flex  h-32 w-5/6 items-center justify-between bg-zinc-900 opacity-80">
+    <div className="absolute z-10  flex h-32 w-5/6 items-center justify-between bg-zinc-900 opacity-80">
       <Link href="/" className=" flex items-center gap-4">
         <LogoHeader className="ml-5  h-24 w-auto" />
         <div>
@@ -30,6 +30,7 @@ export default function Navbar() {
         </Link>
         <Link
           href={"https://zrzutka.pl/drugie-zycie-dla-malej"}
+          target="_blank"
           className="mr-8 flex h-fit px-1 text-lg font-medium text-white hover:text-pink-600 active:text-pink-700"
         >
           Donate
