@@ -1,25 +1,66 @@
 import Image from "next/image";
-import catPH from "../assets/placeholder.jpg";
+import adopt from "../assets/Adopt.jpg";
+import foster from "../assets/Foster.jpg";
+import vol from "../assets/Vol.jpg";
+import donate from "../assets/Donate.jpg";
+import Link from "next/link";
 
 const items = [
-  { image: catPH, id: 1 },
-  { image: catPH, id: 2 },
-  { image: catPH, id: 3 },
-  { image: catPH, id: 4 },
+  {
+    image: adopt,
+    text: "Meet our wonderful animals and get a new amazing friend today!",
+    link: "/adopt",
+    title: "Adopt",
+  },
+  {
+    image: foster,
+    text: "By opening your home, you can change animal's life while they await their forever home.",
+    link: "/foster",
+    title: "Foster",
+  },
+  {
+    image: vol,
+    text: "Do you love animals? We too! Come and help us grant them a better life they deserve.",
+    link: "/volunteer",
+    title: "Volunteer",
+  },
+  {
+    image: donate,
+    text: "Our animals need food, meds, toys and much more. We need funds to get them those things.",
+    link: "https://zrzutka.pl/drugie-zycie-dla-malej",
+    title: "Donate",
+  },
 ];
 
 export default function Buttons() {
   return (
-    <div className="flex w-5/6 bg-pink-900">
-      {items.map((item) => {
-        return (
-          <div key={item.id} className="flex flex-col items-center p-6">
-            <Image src={item.image} alt="alt" className="mt-28 rounded-3xl " />
-            <div>TEXT</div>
-            <div>lorem ipsum dolor sit amen</div>
-          </div>
-        );
-      })}
+    <div className="flex w-5/6 flex-col items-center bg-pink-900">
+      <div className="mt-6 text-5xl text-white">
+        Your next best friend is waiting!
+      </div>
+      <div className="w-1/2 p-6 text-center text-lg text-zinc-50">
+        It's not about being flawless; it's about finding the right friend and
+        creating wonderful moments together.
+      </div>
+      <div className="flex gap-12 p-10">
+        {items.map((item) => {
+          return (
+            <Link
+              href={item.link}
+              key={item.title}
+              className="mb-6 flex w-1/4 flex-col items-center drop-shadow transition-transform duration-200 ease-in-out hover:-translate-y-2"
+            >
+              <Image src={item.image} alt="alt" className="  rounded-xl" />
+              <div className="p-2 text-2xl font-medium text-white">
+                {item.title}
+              </div>
+              <div className="p-2 text-center font-light text-white">
+                {item.text}
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </div>
   );
 }
