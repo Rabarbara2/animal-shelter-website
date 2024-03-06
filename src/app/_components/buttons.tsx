@@ -35,12 +35,13 @@ const items = [
 export default function Buttons() {
   return (
     <div className="flex w-5/6 flex-col items-center bg-pink-900">
-      <div className="mt-6 text-5xl text-white">
-        Your next best friend is waiting!
+      <div className=" -translate-y-16 text-center text-5xl font-semibold leading-snug text-white">
+        <p>Your next</p>
+        <p>best friend is waiting! </p>
       </div>
-      <div className="w-1/2 p-6 text-center text-lg text-zinc-50">
-        It's not about being flawless; it's about finding the right friend and
-        creating wonderful moments together.
+      <div className="w-1/2 -translate-y-10 text-center  text-lg text-zinc-50">
+        It&apos;s not about being flawless; it&apos;s about finding the right
+        friend and creating wonderful moments together.
       </div>
       <div className="flex gap-12 p-10">
         {items.map((item) => {
