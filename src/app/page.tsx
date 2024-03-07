@@ -10,6 +10,7 @@ import Navbar from "./_components/navbar";
 import Hero from "./_components/hero";
 import Buttons from "./_components/buttons";
 import AnimalCard from "./_components/animal-card";
+import MainPageAdopt from "./_components/main-page-adopt";
 
 export default async function Home() {
   noStore();
@@ -26,11 +27,8 @@ export default async function Home() {
         }
 
         <Buttons />
-        <div className="flex w-5/6 items-center justify-between gap-10 p-10">
-          <AnimalCard />
-          <AnimalCard />
-          <AnimalCard />
-        </div>
+
+        <MainPageAdopt />
 
         <div className="text-white">animal gallery</div>
         <div className="text-white">join us</div>
