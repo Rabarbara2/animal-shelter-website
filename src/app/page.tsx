@@ -11,6 +11,7 @@ import Hero from "./_components/hero";
 import Buttons from "./_components/buttons";
 import AnimalCard from "./_components/animal-card";
 import MainPageAdopt from "./_components/main-page-adopt";
+import NewsCard from "./_components/news-card";
 
 export default async function Home() {
   noStore();
@@ -29,6 +30,12 @@ export default async function Home() {
         <Buttons />
 
         <MainPageAdopt />
+        <div className=" flex w-5/6 flex-col items-center gap-20 bg-pink-900 p-12 text-5xl text-white">
+          NEWS
+          <NewsCard />
+          <NewsCard />
+          <NewsCard />
+        </div>
 
         <div className="text-white">animal gallery</div>
         <div className="text-white">join us</div>

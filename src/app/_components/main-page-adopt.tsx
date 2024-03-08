@@ -3,14 +3,20 @@ import Link from "next/link";
 import dog from "../assets/Adopt.jpg";
 import cat from "../assets/placeholder.jpg";
 import bird from "../assets/birb.jpg";
+import Triangle from "../assets/triangle";
 
+//TODO zmień styl napisu
 export default function MainPageAdopt() {
   return (
-    <div className="w-5/6">
-      <div className="mt-1 bg-pink-900 p-10 text-center text-5xl font-semibold leading-snug text-white">
+    <div className=" w-5/6 overflow-hidden">
+      <div className="relative h-36 bg-pink-900">
+        <Triangle className=" absolute bottom-0 translate-y-2 rotate-180 scale-105 fill-stone-400  outline-none" />
+      </div>
+
+      <div className=" z-30 bg-stone-400 p-10 text-center text-5xl font-semibold leading-snug text-white shadow">
         Who&apos;s gonna be your next friend?
       </div>
-      <div className="flex  flex-row justify-center gap-12 bg-pink-900 p-6">
+      <div className="flex  flex-row justify-center gap-12 bg-stone-400 p-6 pb-14">
         <Link
           href={"/"}
           className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
@@ -55,6 +61,9 @@ export default function MainPageAdopt() {
             best friend!
           </div>
         </Link>
+      </div>
+      <div className="relative h-36 bg-pink-900 ">
+        <Triangle className=" absolute top-0 -translate-y-1  scale-105 fill-stone-400 outline-none" />
       </div>
     </div>
   );
