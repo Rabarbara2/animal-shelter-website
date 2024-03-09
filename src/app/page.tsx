@@ -30,8 +30,8 @@ export default async function Home() {
         <Buttons />
 
         <MainPageAdopt />
-        <div className=" flex w-5/6 flex-col items-center gap-20 bg-pink-900 p-12 text-5xl text-white">
-          NEWS
+        <div className=" flex w-5/6 flex-col items-center gap-20 bg-pink-900 p-12 text-5xl font-semibold text-white">
+          News and Happenings
           <NewsCard />
           <NewsCard />
           <NewsCard />

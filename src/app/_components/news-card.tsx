@@ -18,11 +18,12 @@ export default function NewsCard() {
             </div>
             <div className="w-fit text-sm text-stone-600">06.10.2024</div>
           </div>
-          <div className="text-justify text-lg text-zinc-800">
+          <div className="text-justify text-lg font-normal text-zinc-800">
             description Lorem ipsum dolor sit amet, consectetur adipiscing elit,
             sed do eiusmod tempor incididunt description Lorem ipsum dolor sit
             amet, conse, sed do e jiwegii nin ienei nine iiusmod tempor
-            incididunt
+            incididunt rmmormo m omeo moemomomom mo mo mom om omomomomom omom
+            omo mo mo momom om om omomomomomomom omomomommomo om om o mo mo
           </div>
         </div>
         <Link
