@@ -12,6 +12,7 @@ import Buttons from "./_components/buttons";
 import AnimalCard from "./_components/animal-card";
 import MainPageAdopt from "./_components/main-page-adopt";
 import NewsCard from "./_components/news-card";
+import NewsSection from "./_components/news-section";
 
 export default async function Home() {
   noStore();
@@ -30,12 +31,7 @@ export default async function Home() {
         <Buttons />
 
         <MainPageAdopt />
-        <div className=" flex w-5/6 flex-col items-center gap-20 bg-pink-900 p-12 text-5xl font-semibold text-white">
-          News and Happenings
-          <NewsCard />
-          <NewsCard />
-          <NewsCard />
-        </div>
+        <NewsSection />
 
         <div className="text-white">animal gallery</div>
         <div className="text-white">join us</div>
