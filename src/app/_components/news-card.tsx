@@ -1,10 +1,12 @@
 import Image from "next/image";
 import adopt from "../assets/Foster.jpg";
 import Link from "next/link";
+import { MySqlTimestamp } from "drizzle-orm/mysql-core";
 
 export default function NewsCard(props: {
   category: string;
   shortText: string;
+  createdAt: Date;
 }) {
   return (
     <div className="relative flex h-fit w-5/6 flex-col gap-4 rounded-xl bg-red-50 p-6 shadow lg:flex-row lg:items-stretch">
@@ -19,9 +21,15 @@ export default function NewsCard(props: {
             <div className="w-fit rounded bg-pink-950 p-2 text-base font-semibold text-white">
               {props.category}
             </div>
-            <div className="w-fit text-sm text-stone-600">06.10.2024</div>
+            <div className="w-fit text-sm text-stone-600">
+              {props.createdAt.toLocaleString([], {
+                year: "numeric",
+                month: "numeric",
+                day: "numeric",
+              })}
+            </div>
           </div>
-          <div className="h-44 w-auto overflow-hidden text-justify text-lg font-normal text-zinc-800">
+          <div className="line-clamp-5 h-[140px] w-auto overflow-hidden text-justify text-lg font-normal text-zinc-800">
             {props.shortText}
           </div>
         </div>

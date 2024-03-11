@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     uri: env.DATABASE_URL,
   },
-  tablesFilter: ["animal-shelter-website_*"],
+  tablesFilter: ["asw_*"],
 } satisfies Config;

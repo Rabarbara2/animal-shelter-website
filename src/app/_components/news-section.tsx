@@ -1,4 +1,7 @@
 import NewsCard from "./news-card";
+import { api } from "~/trpc/server";
+
+const latestArticles = await api.article.getThreeLatest.query();
 
 export default function NewsSection() {
   return (
@@ -6,15 +9,16 @@ export default function NewsSection() {
       <div className="p-12 text-center text-5xl font-medium text-white">
         Shelter news
       </div>
-      <NewsCard
-        shortText="Dog found near orange streat. He's got a collar, we're looking for his owner"
-        category="Animal Found"
-      />
-      <NewsCard
-        shortText="We are currently looking for a cat petter. We offer good salary. More info in this article."
-        category="Job offer"
-      />
-      <NewsCard shortText="We want to thank everyone!" category="Thank you!" />
+      {latestArticles.map((article) => {
+        return (
+          <NewsCard
+            key={article.id}
+            shortText={article.text}
+            category={article.category}
+            createdAt={article.createdAt}
+          />
+        );
+      })}
     </div>
   );
 }
