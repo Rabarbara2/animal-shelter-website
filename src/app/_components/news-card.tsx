@@ -5,7 +5,7 @@ import { MySqlTimestamp } from "drizzle-orm/mysql-core";
 
 export default function NewsCard(props: {
   category: string;
-  shortText: string;
+  text: string;
   createdAt: Date;
 }) {
   return (
@@ -19,7 +19,7 @@ export default function NewsCard(props: {
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
             <div className="w-fit rounded bg-pink-950 p-2 text-base font-semibold text-white">
-              {props.category}
+              {props.category.charAt(0).toUpperCase() + props.category.slice(1)}
             </div>
             <div className="w-fit text-sm text-stone-600">
               {props.createdAt.toLocaleString([], {
@@ -29,10 +29,11 @@ export default function NewsCard(props: {
               })}
             </div>
           </div>
-          <div className="line-clamp-5 h-[140px] w-auto overflow-hidden text-justify text-lg font-normal text-zinc-800">
-            {props.shortText}
+          <div className="line-clamp-5 h-[140px] w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800">
+            {props.text}
           </div>
         </div>
+
         <Link
           href={""}
           className="h-16 w-fit justify-center self-end rounded-xl bg-pink-950 p-5 text-center text-xl font-medium text-white shadow"

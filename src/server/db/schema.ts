@@ -37,13 +37,12 @@ export const posts = createTable(
 );
 export const articles = createTable("article", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-  category: varchar("category", { length: 128 }),
-  short_text: varchar("short_text", { length: 256 }),
+  category: varchar("category", { length: 128 }).notNull(),
   createdById: varchar("createdById", { length: 255 }).notNull(),
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  text: text("text"),
+  text: text("text").notNull(),
 });
 
 export const users = createTable("user", {

@@ -23,13 +23,10 @@ export default async function Home() {
       <div className=" flex flex-col items-center">
         <Navbar />
         <Hero />
-
         <Buttons />
-
         <MainPageAdopt />
         <NewsSection />
 
-        <div className="text-white">animal gallery </div>
         <div className="text-white">join us</div>
         <div className="text-white">news</div>
         <div className="text-white">sponsors</div>

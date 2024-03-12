@@ -13,7 +13,7 @@ export default function NewsSection() {
         return (
           <NewsCard
             key={article.id}
-            shortText={article.text}
+            text={article.text}
             category={article.category}
             createdAt={article.createdAt}
           />
