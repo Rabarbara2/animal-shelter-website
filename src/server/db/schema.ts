@@ -7,8 +7,10 @@ import {
   primaryKey,
   text,
   timestamp,
+  tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
+import { boolean } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
 /**
@@ -43,6 +45,30 @@ export const articles = createTable("article", {
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
   text: text("text").notNull(),
+});
+
+export const cats = createTable("cat", {
+  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+  name: varchar("name", { length: 128 }).notNull(),
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  gender: varchar("gender", { length: 10 }),
+  dateOfBirth: timestamp("dateOfBirth").notNull(),
+  isDOBEstimated: tinyint("is_DOB_Estimated").notNull(),
+  colour: varchar("colour", { length: 50 }).notNull(),
+  furLength: varchar("fur_length", { length: 100 }),
+  race: varchar("race", { length: 50 }).notNull(),
+  //medical
+  vaccineFVP: tinyint("vaccineFVP"),
+  vaccineFVR: tinyint("vaccineFVP"),
+  vaccineFeLV: tinyint("vaccineFVP"),
+  vaccineFHV: tinyint("vaccineFVP"),
+  vaccineFCV: tinyint("vaccineFVP"),
+
+  positiveFIV: tinyint("positiveFIV"),
+  positiveFeLV: tinyint("positiveFeLV"),
+  positiveFIP: tinyint("positiveFIP"),
 });
 
 export const users = createTable("user", {

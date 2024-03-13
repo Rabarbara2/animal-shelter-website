@@ -28,10 +28,14 @@ export default function NewsCard(props: {
                 day: "numeric",
               })}
             </div>
+            <div />
           </div>
-          <div className="line-clamp-5 h-[140px] w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800">
-            {props.text}
-          </div>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: props.text,
+            }}
+            className="line-clamp-5 h-[140px] w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800"
+          ></div>
         </div>
 
         <Link
