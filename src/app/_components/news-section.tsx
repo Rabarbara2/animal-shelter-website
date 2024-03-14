@@ -1,3 +1,4 @@
+import Link from "next/link";
 import NewsCard from "./news-card";
 import { api } from "~/trpc/server";
 
@@ -19,6 +20,12 @@ export default function NewsSection() {
           />
         );
       })}
+      <Link
+        href="/articles"
+        className="rounded-xl bg-stone-400 p-6 text-xl font-semibold text-black shadow hover:bg-stone-500 "
+      >
+        see more articles
+      </Link>
     </div>
   );
 }

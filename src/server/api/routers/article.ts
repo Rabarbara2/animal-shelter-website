@@ -9,4 +9,9 @@ export const articleRouter = createTRPCRouter({
       limit: 3,
     });
   }),
+  getAll: publicProcedure.query(({ ctx }) => {
+    return ctx.db.query.articles.findMany({
+      orderBy: (articles, { desc }) => [desc(articles.createdAt)],
+    });
+  }),
 });

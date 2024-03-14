@@ -1,6 +1,7 @@
 import { relations, sql } from "drizzle-orm";
 import {
   bigint,
+  boolean,
   index,
   int,
   mysqlTableCreator,
@@ -10,7 +11,6 @@ import {
   tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
-import { boolean } from "drizzle-orm/pg-core";
 import { type AdapterAccount } from "next-auth/adapters";
 
 /**
@@ -55,20 +55,20 @@ export const cats = createTable("cat", {
     .notNull(),
   gender: varchar("gender", { length: 10 }),
   dateOfBirth: timestamp("dateOfBirth").notNull(),
-  isDOBEstimated: tinyint("is_DOB_Estimated").notNull(),
+  isDOBEstimated: boolean("is_DOB_Estimated").notNull(),
   colour: varchar("colour", { length: 50 }).notNull(),
   furLength: varchar("fur_length", { length: 100 }),
   race: varchar("race", { length: 50 }).notNull(),
   //medical
-  vaccineFVP: tinyint("vaccineFVP"),
-  vaccineFVR: tinyint("vaccineFVP"),
-  vaccineFeLV: tinyint("vaccineFVP"),
-  vaccineFHV: tinyint("vaccineFVP"),
-  vaccineFCV: tinyint("vaccineFVP"),
+  vaccineFVP: boolean("vaccineFVP"),
+  vaccineFVR: boolean("vaccineFVP"),
+  vaccineFeLV: boolean("vaccineFVP"),
+  vaccineFHV: boolean("vaccineFVP"),
+  vaccineFCV: boolean("vaccineFVP"),
 
-  positiveFIV: tinyint("positiveFIV"),
-  positiveFeLV: tinyint("positiveFeLV"),
-  positiveFIP: tinyint("positiveFIP"),
+  positiveFIV: boolean("positiveFIV"),
+  positiveFeLV: boolean("positiveFeLV"),
+  positiveFIP: boolean("positiveFIP"),
 });
 
 export const users = createTable("user", {
