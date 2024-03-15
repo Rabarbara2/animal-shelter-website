@@ -22,7 +22,7 @@ export default function NewsSection() {
       })}
       <Link
         href="/articles"
-        className="rounded-xl bg-stone-400 p-6 text-xl font-semibold text-black shadow hover:bg-stone-500 "
+        className="rounded-xl bg-stone-300 p-6 text-2xl font-semibold text-black shadow hover:bg-stone-400 "
       >
         see more articles
       </Link>
