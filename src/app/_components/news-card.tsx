@@ -17,7 +17,7 @@ export default function NewsCard(props: {
         alt="animal"
         className="h-64 w-auto rounded-xl object-cover object-top"
       />
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">
             <div className="w-fit rounded bg-pink-950 p-2 text-base font-semibold text-white">
@@ -36,17 +36,17 @@ export default function NewsCard(props: {
             dangerouslySetInnerHTML={{
               __html: props.text,
             }}
-            className={`w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800
-              ${isActive ? " " : "line-clamp-5 h-[140px]"}`}
+            className={`w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800 transition-all duration-700 ease-in-out
+              ${isActive ? "h-max max-h-[1500px]" : "max-h-[140px]"}`}
           ></div>
         </div>
 
-        <div
+        <button
           onClick={() => setIsActive(!isActive)}
           className="h-16 w-fit cursor-pointer select-none justify-center self-end rounded-xl bg-pink-950 p-5 text-center text-xl font-medium text-white shadow"
         >
-          {isActive ? "Read less" : "Read more"}
-        </div>
+          {isActive ? "Close" : "Read more"}
+        </button>
       </div>
     </div>
   );
