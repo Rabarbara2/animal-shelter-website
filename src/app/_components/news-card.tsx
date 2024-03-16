@@ -37,7 +37,7 @@ export default function NewsCard(props: {
               __html: props.text,
             }}
             className={`w-auto overflow-hidden whitespace-pre-wrap text-justify text-lg font-normal text-zinc-800 transition-all duration-700 ease-in-out
-              ${isActive ? "h-max max-h-[1500px]" : "max-h-[140px]"}`}
+              ${isActive ? " max-h-[1500px]" : "max-h-[140px]"}`}
           ></div>
         </div>
 
