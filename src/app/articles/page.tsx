@@ -5,7 +5,7 @@ import Navbar from "../_components/navbar";
 
 const latestArticles = await api.article.getAll.query();
 
-export default function Dupa() {
+export default function Articles() {
   return (
     <main className=" flex min-h-screen flex-col items-center bg-zinc-900">
       <div className="w-5/6 bg-pink-900">
