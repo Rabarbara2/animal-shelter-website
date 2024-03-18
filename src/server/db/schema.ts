@@ -50,6 +50,7 @@ export const articles = createTable("article", {
 export const cats = createTable("cat", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
   name: varchar("name", { length: 128 }).notNull(),
+  image: varchar("image", { length: 255 }).notNull(),
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
