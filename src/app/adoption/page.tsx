@@ -7,7 +7,7 @@ export default async function Articles() {
   return (
     <main className=" flex min-h-screen flex-col items-center bg-zinc-900">
       <div className="w-5/6 bg-pink-900">
-        <div className="mt-36 flex justify-center gap-8 p-6">
+        <div className="mt-36 flex flex-wrap justify-center gap-8 p-6">
           {allCats.map((cat) => {
             return (
               <AnimalCard
