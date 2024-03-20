@@ -18,7 +18,7 @@ export default function MainPageAdopt() {
       </div>
       <div className="flex  flex-row justify-center gap-12 bg-stone-300 p-6 pb-14">
         <Link
-          href={"/"}
+          href={"/adoption/dogs"}
           className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
         >
           <div className="p-2 text-4xl font-semibold ">a Dog?</div>
@@ -32,7 +32,7 @@ export default function MainPageAdopt() {
           </div>
         </Link>
         <Link
-          href={"/"}
+          href={"/adoption/cats"}
           className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
         >
           <div className="p-2 text-4xl font-semibold ">a Cat?</div>
@@ -47,7 +47,7 @@ export default function MainPageAdopt() {
           </div>
         </Link>
         <Link
-          href={"/"}
+          href={"/adoption/others"}
           className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
         >
           <div className="p-2 text-4xl font-semibold ">an other pet?</div>

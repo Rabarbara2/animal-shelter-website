@@ -17,7 +17,7 @@ export default function Navbar() {
       </Link>
       <div className="flex justify-end gap-7  ">
         <Link
-          href={""}
+          href={"/adoption"}
           className="flex h-fit px-1 text-lg font-medium text-white hover:text-pink-600 active:text-pink-700"
         >
           Adoption
