@@ -60,17 +60,53 @@ export const cats = createTable("cat", {
   colour: varchar("colour", { length: 50 }).notNull(),
   furLength: varchar("fur_length", { length: 100 }),
   race: varchar("race", { length: 50 }).notNull(),
-  //medical
-  vaccineFVP: boolean("vaccineFVP"),
-  vaccineFVR: boolean("vaccineFVP"),
-  vaccineFeLV: boolean("vaccineFVP"),
-  vaccineFHV: boolean("vaccineFVP"),
-  vaccineFCV: boolean("vaccineFVP"),
-
-  positiveFIV: boolean("positiveFIV"),
-  positiveFeLV: boolean("positiveFeLV"),
-  positiveFIP: boolean("positiveFIP"),
 });
+
+export const healthIssues = createTable("health_issue", {
+  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+  name: varchar("name", { length: 100 }).notNull(),
+  type: varchar("type", { length: 10 }).notNull(),
+});
+
+export const catHealthRecords = createTable("cat_health_record", {
+  catId: bigint("cat_id", {
+    mode: "bigint",
+  })
+    .references(() => cats.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .notNull(),
+  healthIssueId: bigint("health_issue_id", {
+    mode: "bigint",
+  })
+    .references(() => healthIssues.id)
+    .notNull(),
+  vaccinatedAt: timestamp("vaccinated_at"),
+  testedAt: timestamp("tested_at"),
+});
+
+export const catRelations = relations(cats, ({ many }) => ({
+  catHealthRecords: many(catHealthRecords),
+}));
+
+export const healthIssuesRelations = relations(cats, ({ many }) => ({
+  catHealthRecords: many(catHealthRecords),
+}));
+
+export const catsToHealthIssuesRelations = relations(
+  catHealthRecords,
+  ({ one }) => ({
+    cat: one(cats, {
+      fields: [catHealthRecords.catId],
+      references: [cats.id],
+    }),
+    healthIssue: one(healthIssues, {
+      fields: [catHealthRecords.healthIssueId],
+      references: [healthIssues.id],
+    }),
+  }),
+);
 
 export const users = createTable("user", {
   id: varchar("id", { length: 255 }).notNull().primaryKey(),

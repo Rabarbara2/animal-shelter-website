@@ -4,6 +4,7 @@ import Navbar from "../../_components/navbar";
 
 export default async function Cats() {
   const allCats = await api.cat.getAll.query();
+  const healthIssues = await api.healthIssue.getAll.query();
 
   return (
     <main className=" flex min-h-screen flex-col items-center bg-zinc-900">
@@ -20,16 +21,7 @@ export default async function Cats() {
         <div className="mb-16 flex flex-wrap justify-center gap-8 p-6">
           {allCats.map((cat) => {
             return (
-              <AnimalCard
-                image={cat.image}
-                key={cat.id}
-                fip={cat.positiveFIP}
-                gender={cat.gender}
-                name={cat.name}
-                race={cat.race}
-                fiv={cat.positiveFIV}
-                felv={cat.positiveFeLV}
-              />
+              <AnimalCard key={cat.id} cat={cat} healthIssues={healthIssues} />
             );
           })}
         </div>

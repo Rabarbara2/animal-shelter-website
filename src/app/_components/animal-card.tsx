@@ -1,24 +1,19 @@
 import Image from "next/image";
 import MaleSymbol from "../assets/male-symbol";
 import FemaleSymbol from "../assets/female-symbol";
+import { RouterOutputs } from "~/trpc/shared";
+
+type Cat = RouterOutputs["cat"]["getAll"]["0"];
+type HealthIssues = RouterOutputs["healthIssue"]["getAll"];
 
 type AnimalCardProps = {
-  name: string;
-  race: string;
-  gender: string | null;
-  fip: boolean | null;
-  fiv: boolean | null;
-  felv: boolean | null;
-  image: string;
+  cat: Cat;
+  healthIssues: HealthIssues;
 };
 
 export default function AnimalCard({
-  fip,
-  felv,
-  fiv,
-  gender,
-  image,
-  name,
+  cat: { image, gender, name, catHealthRecords },
+  healthIssues,
 }: AnimalCardProps) {
   return (
     <div className="flex  w-[21rem] flex-col items-center rounded-xl bg-red-50  shadow transition-colors duration-100 ease-in-out hover:bg-white">
@@ -40,9 +35,30 @@ export default function AnimalCard({
         className="🐷 h-96 w-72 rounded-xl border-4 object-cover"
       />
       <div className="flex min-h-[40px] justify-center">
-        {fip && <div className="p-3 font-semibold text-red-500">FIP!</div>}
-        {fiv && <div className="p-3 font-semibold text-red-500">FIV!</div>}
-        {felv && <div className="p-3 font-semibold text-red-500">FELV!</div>}
+        <div className="flex items-center last:rounded-r">
+          {catHealthRecords.map((record) => {
+            const healthIssue = healthIssues.find(
+              ({ id }) => id === Number(record.healthIssueId),
+            );
+
+            if (!healthIssue) {
+              return null;
+            }
+
+            return (
+              <div
+                key={`${record.catId} ${record.healthIssueId}`}
+                className={`border ${healthIssue.type === "disease" ? "border-red-800 bg-red-600" : "border-teal-800 bg-teal-600"} p-1 text-[8px] text-white first:rounded-l last:rounded-r`}
+              >
+                {
+                  healthIssues.find(
+                    ({ id }) => id === Number(record.healthIssueId),
+                  )?.name
+                }
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
