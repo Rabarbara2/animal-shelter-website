@@ -27,8 +27,6 @@ export default async function Home() {
         <MainPageAdopt />
         <NewsSection />
 
-        <div className="text-white">join us</div>
-        <div className="text-white">news</div>
         <div className="text-white">sponsors</div>
         <div className="text-white">footer</div>
       </div>
