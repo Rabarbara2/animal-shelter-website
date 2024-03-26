@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import LogoHeader from "../assets/logo-header";
 export default function Navbar() {

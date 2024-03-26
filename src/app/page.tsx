@@ -12,6 +12,7 @@ import Buttons from "./_components/buttons";
 import MainPageAdopt from "./_components/main-page-adopt";
 
 import NewsSection from "./_components/news-section";
+import Footer from "./_components/footer";
 
 export default async function Home() {
   noStore();
@@ -26,9 +27,7 @@ export default async function Home() {
         <Buttons />
         <MainPageAdopt />
         <NewsSection />
-
-        <div className="text-white">sponsors</div>
-        <div className="text-white">footer</div>
+        <Footer />
       </div>
     </main>
   );
