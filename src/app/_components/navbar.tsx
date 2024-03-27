@@ -22,7 +22,7 @@ export default function Navbar() {
           Adoption
         </Link>
         <Link
-          href={""}
+          href={"/aboutus"}
           className="flex h-fit px-1 text-lg font-medium text-white hover:text-pink-600 active:text-pink-700"
         >
           About Us
