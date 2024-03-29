@@ -1,10 +1,11 @@
 import obrazek from "../assets/animals.jpg";
 import Navbar from "../_components/navbar";
 import Image from "next/image";
+import Triangle from "../assets/triangle";
 
 export default async function Aboutus() {
   return (
-    <div className="flex justify-center bg-zinc-800">
+    <div className="flex flex-col items-center bg-zinc-800">
       <Navbar />
       <div className="relative flex w-5/6 flex-col items-center justify-center overflow-hidden">
         <Image src={obrazek} alt="hero" className="  brightness-[70%]" />
@@ -16,6 +17,9 @@ export default async function Aboutus() {
             Animals are super cool in our opinion
           </div>
         </div>
+      </div>
+      <div className="w-5/6 overflow-hidden brightness-[70%]">
+        <Triangle fill="white" />
       </div>
     </div>
   );
