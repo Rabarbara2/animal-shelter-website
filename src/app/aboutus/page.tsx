@@ -18,8 +18,11 @@ export default async function Aboutus() {
           </div>
         </div>
       </div>
-      <div className="w-5/6 overflow-hidden brightness-[70%]">
-        <Triangle fill="white" />
+      <div className="w-5/6 overflow-hidden bg-pink-900 ">
+        <Triangle fill="white" className="brightness-[70%]" />
+      </div>
+      <div className="h-96 w-5/6 bg-pink-900 p-12 text-lg text-white">
+        We are helping cats and dogs and birds.
       </div>
     </div>
   );
