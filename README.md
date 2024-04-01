@@ -17,3 +17,9 @@ The website is intended for use by both guests and employees.
 - Managing shelter animals
 - Ability to add news to the website
 - Recording vaccination information, etc.
+
+#### done:
+
+- basic news section
+- browsing cats
+- basic site design (it's bad)
