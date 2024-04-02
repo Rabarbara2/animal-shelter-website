@@ -8,7 +8,7 @@ export default function Footer() {
           <LogoHeader className="h-20 w-fit p-1" />
           <div className=" text-lg font-medium text-white">Animal Shelter</div>
         </div>
-        <div className="flex flex-col items-center text-white">
+        <div className="flex flex-col text-white">
           <div>Shelter for homeless animals</div>
           <div>21 Animal Street</div>
           <div>Townie McTownface</div>
