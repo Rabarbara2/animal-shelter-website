@@ -16,7 +16,7 @@ export default function Footer() {
         </div>
         <div className="text-white">
           <div>Call us</div>
-          +48 213 223 225
+          +48 213 223 213
         </div>
       </div>
       <div className="p-1">All rights reserved 2023</div>
