@@ -3,6 +3,8 @@ import Navbar from "../_components/navbar";
 import Image from "next/image";
 import Triangle from "../assets/triangle";
 
+import FormTest from "../_components/form-test";
+
 export default async function Aboutus() {
   return (
     <div className="flex flex-col items-center bg-zinc-800">
@@ -21,6 +23,7 @@ export default async function Aboutus() {
       <div className="w-5/6 overflow-hidden bg-pink-900 ">
         <Triangle fill="white" className="brightness-[70%]" />
       </div>
+      <FormTest />
       <div className="h-96 w-5/6 bg-pink-900 p-12 text-lg text-white">
         At [Animal Shelter Name], we believe that every life is precious and
         deserving of love and care. Our dedicated team of staff and volunteers
