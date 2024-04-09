@@ -22,16 +22,21 @@ export default function FormTest() {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
 
+  const imageUrl = watch("imageLink");
+
   return (
-    <div className="flex w-5/6 justify-center">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex w-full flex-col">
+    <div className="flex w-5/6 items-center justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-1/2 flex-col gap-2"
+      >
         <div>
           <div>name:</div>
 
           <input
             defaultValue=""
             {...register("name", {})}
-            className="  w-1/3 p-1 text-lg"
+            className="  w-2/3 p-1 text-lg"
           />
         </div>
         <div>
@@ -40,7 +45,7 @@ export default function FormTest() {
           <input
             defaultValue=""
             {...register("colour", {})}
-            className=" w-1/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg "
           />
         </div>
         <div>
@@ -49,13 +54,13 @@ export default function FormTest() {
           <input
             defaultValue=""
             {...register("imageLink", {})}
-            className=" w-1/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg "
           />
         </div>
         <div>
           <div>gender: </div>
 
-          <select {...register("gender", {})} className=" w-1/3 p-1 text-lg ">
+          <select {...register("gender", {})} className=" w-2/3 p-1 text-lg ">
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
@@ -66,7 +71,7 @@ export default function FormTest() {
           <input
             type="date"
             {...register("dateOfBirth", {})}
-            className=" w-1/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg "
           />
         </div>
         <label>
@@ -81,7 +86,7 @@ export default function FormTest() {
           <div>fur length: </div>
           <select
             {...register("furLength", {})}
-            className=" w-1/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg "
           >
             <option value="bald">Bald</option>
             <option value="short">Short</option>
@@ -96,7 +101,7 @@ export default function FormTest() {
           <input
             defaultValue=""
             {...register("race", {})}
-            className=" w-1/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg "
           />
         </div>
 
@@ -106,8 +111,20 @@ export default function FormTest() {
           value="submit"
         />
       </form>
-      <div className="relative h-96 w-96">
-        <Image src={watch("imageLink")} alt="woof" fill />
+      <div className="flex w-1/2 flex-col items-center justify-center gap-4 text-3xl text-white">
+        Image Preview
+        <div className="relative h-96 w-96">
+          {imageUrl && (
+            <Image
+              src={imageUrl}
+              alt="bad image"
+              fill
+              loader={(loader) => loader.src}
+              className="h-1/2 w-1/2 text-base"
+              onError={() => console.log("wyjebka")}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
