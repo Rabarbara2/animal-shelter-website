@@ -1,6 +1,9 @@
 "use client";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
+import { db } from "~/server/db";
+import { cats } from "~/server/db/schema";
+import { api } from "~/trpc/react";
 
 type Inputs = {
   name: string;
@@ -14,13 +17,26 @@ type Inputs = {
 };
 
 export default function FormTest() {
+  const { mutate } = api.cat.post.useMutation();
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    mutate({
+      name: data.name,
+      colour: data.colour,
+      dateOfBirth: new Date(data.dateOfBirth),
+      image: data.imageLink,
+      isDOBEstimated: data.estimated,
+      race: data.race,
+      furLength: data.furLength,
+      gender: data.gender,
+    });
+    console.log(typeof data.dateOfBirth);
+  };
 
   const imageUrl = watch("imageLink");
 

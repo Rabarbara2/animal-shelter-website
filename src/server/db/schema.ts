@@ -11,6 +11,7 @@ import {
   tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
+import { createInsertSchema } from "drizzle-zod";
 import { type AdapterAccount } from "next-auth/adapters";
 
 /**
@@ -182,3 +183,5 @@ export const verificationTokens = createTable(
     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
   }),
 );
+
+export const insertCatsSchema = createInsertSchema(cats);
