@@ -17,7 +17,14 @@ type Inputs = {
 };
 
 export default function FormTest() {
-  const { mutate } = api.cat.post.useMutation();
+  const { mutate } = api.cat.post.useMutation({
+    onError: () => {
+      alert("error");
+    },
+    onSuccess: () => {
+      alert("success!");
+    },
+  });
   const {
     register,
     handleSubmit,
@@ -35,7 +42,6 @@ export default function FormTest() {
       furLength: data.furLength,
       gender: data.gender,
     });
-    console.log(typeof data.dateOfBirth);
   };
 
   const imageUrl = watch("imageLink");
