@@ -93,7 +93,7 @@ export default function FormTest() {
           <input
             type="date"
             {...register("dateOfBirth", {})}
-            className=" w-2/3 p-1 text-lg "
+            className=" w-2/3 p-1 text-lg"
           />
         </div>
         <label>
@@ -101,15 +101,12 @@ export default function FormTest() {
           <input
             type="checkbox"
             {...register("estimated", {})}
-            className="m-2 p-1 text-lg "
+            className="m-2 p-1 text-lg"
           />
         </label>
         <div>
           <div>fur length: </div>
-          <select
-            {...register("furLength", {})}
-            className=" w-2/3 p-1 text-lg "
-          >
+          <select {...register("furLength", {})} className=" w-2/3 p-1 text-lg">
             <option value="bald">Bald</option>
             <option value="short">Short</option>
             <option value="medium">Medium</option>
@@ -123,7 +120,7 @@ export default function FormTest() {
           <input
             defaultValue=""
             {...register("race", {})}
-            className=" w-2/3 p-1 text-lg "
+            className="w-2/3 p-1 text-lg"
           />
         </div>
 
@@ -143,7 +140,6 @@ export default function FormTest() {
               fill
               loader={(loader) => loader.src}
               className="h-1/2 w-1/2 text-base"
-              onError={() => console.log("wyjebka")}
             />
           )}
         </div>
