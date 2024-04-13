@@ -8,7 +8,6 @@ import {
   primaryKey,
   text,
   timestamp,
-  tinyint,
   varchar,
 } from "drizzle-orm/mysql-core";
 import { createInsertSchema } from "drizzle-zod";
