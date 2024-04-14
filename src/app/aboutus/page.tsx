@@ -30,8 +30,8 @@ export default async function Aboutus() {
         work around the clock to ensure that each animal that comes through our
         doors receives the attention, medical care, and support they need to
         thrive. Our shelter is more than just a place for animals to stay
-        temporarily; it's a sanctuary where they are treated with kindness and
-        respect. We provide a nurturing environment where they can heal from
+        temporarily; it&apos;s a sanctuary where they are treated with kindness
+        and respect. We provide a nurturing environment where they can heal from
         past traumas, receive training and socialization, and ultimately find
         loving forever homes. In addition to our commitment to the welfare of
         individual animals, we are also passionate about addressing broader
@@ -44,8 +44,7 @@ export default async function Aboutus() {
         continue our vital work of saving lives and making a difference. Join us
         in our mission to create a world where every animal is valued and
         cherished. Together, we can make a difference, one paw at a time. Thank
-        you for supporting [Animal Shelter Name] and being a part of our
-        journey.
+        you for supporting Animal Shelter and being a part of our journey.
       </div>
     </div>
   );
