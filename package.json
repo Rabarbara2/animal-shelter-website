@@ -19,6 +19,7 @@
     "@trpc/next": "^10.45.1",
     "@trpc/react-query": "^10.45.1",
     "@trpc/server": "^10.45.1",
+    "@vercel/postgres": "^0.8.0",
     "drizzle-orm": "^0.29.4",
     "drizzle-zod": "^0.5.1",
     "next": "^14.1.0",
