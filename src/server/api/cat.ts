@@ -1,15 +1,14 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { cats, insertCatsSchema } from "../db/schema";
+import { catHealthRecords, cats, insertCatsSchema } from "../db/schema";
 
 export const catRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.db.query.cats.findMany({
-      with: {
-        catHealthRecords: true,
-      },
-      orderBy: (cats, { desc }) => [desc(cats.createdAt)],
+    return ctx.db.select()
+    .from(cats)
+    
+    .orderBy(desc("cats.created_at"));
     });
   }),
   post: publicProcedure.input(insertCatsSchema).mutation(({ ctx, input }) => {
