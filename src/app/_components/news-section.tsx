@@ -1,8 +1,9 @@
 import Link from "next/link";
 import NewsCard from "./news-card";
 import { api } from "~/trpc/server";
+import { getThreeArticles } from "~/server/queries";
 
-const latestArticles = await api.article.getThreeLatest.query();
+const latestArticles = await getThreeArticles();
 
 export default function NewsSection() {
   return (

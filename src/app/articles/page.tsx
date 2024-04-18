@@ -2,8 +2,9 @@ import Link from "next/link";
 import NewsCard from "../_components/news-card";
 import { api } from "~/trpc/server";
 import Navbar from "../_components/navbar";
+import { getArticles } from "~/server/queries";
 
-const latestArticles = await api.article.getAll.query();
+const latestArticles = await getArticles();
 
 export default function Articles() {
   return (
