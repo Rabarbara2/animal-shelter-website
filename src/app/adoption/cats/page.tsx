@@ -1,10 +1,11 @@
 import { api } from "~/trpc/server";
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
+import { getCats, getHealthIssues } from "~/server/queries";
 
 export default async function Cats() {
-  const allCats = await api.cat.getAll.query();
-  const healthIssues = await api.healthIssue.getAll.query();
+  const allCats = await getCats();
+  const healthIssues = await getHealthIssues();
 
   return (
     <main className=" flex min-h-screen flex-col items-center bg-zinc-900">

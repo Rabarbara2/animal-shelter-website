@@ -2,8 +2,9 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { db } from "~/server/db";
-import { cats } from "~/server/db/schema";
+import { CatsType, cats } from "~/server/db/schema";
 import { api } from "~/trpc/react";
+import { postCats } from "~/server/queries";
 
 type Inputs = {
   name: string;
@@ -17,34 +18,17 @@ type Inputs = {
 };
 
 export default function FormTest() {
-  const { mutate } = api.cat.post.useMutation({
-    onError: () => {
-      alert("error");
-    },
-    onSuccess: () => {
-      alert("success!");
-    },
-  });
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    mutate({
-      name: data.name,
-      colour: data.colour,
-      dateOfBirth: new Date(data.dateOfBirth),
-      image: data.imageLink,
-      isDOBEstimated: data.estimated,
-      race: data.race,
-      furLength: data.furLength,
-      gender: data.gender,
-    });
+  } = useForm<CatsType>();
+  const onSubmit: SubmitHandler<CatsType> = async (data) => {
+    await postCats(data);
   };
 
-  const imageUrl = watch("imageLink");
+  const imageUrl = watch("image");
 
   return (
     <div className="flex w-5/6 items-center justify-center">
@@ -75,7 +59,7 @@ export default function FormTest() {
 
           <input
             defaultValue=""
-            {...register("imageLink", {})}
+            {...register("image", {})}
             className=" w-2/3 p-1 text-lg "
           />
         </div>
@@ -100,7 +84,7 @@ export default function FormTest() {
           estimated?
           <input
             type="checkbox"
-            {...register("estimated", {})}
+            {...register("isDOBEstimated", {})}
             className="m-2 p-1 text-lg"
           />
         </label>

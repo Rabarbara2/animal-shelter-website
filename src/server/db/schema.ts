@@ -177,3 +177,5 @@ export const catsToHealthIssuesRelations = relations(
 // );
 
 export const insertCatsSchema = createInsertSchema(cats);
+
+export type CatsType = typeof cats.$inferInsert;
