@@ -6,6 +6,11 @@ import { CatsType, cats } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 import { postCats } from "~/server/queries";
 
+enum CatGenders {
+  MALE = "Male",
+  FEMALE = "Female",
+}
+
 type Inputs = {
   name: string;
   colour: string;
@@ -25,6 +30,7 @@ export default function FormTest() {
     formState: { errors },
   } = useForm<CatsType>();
   const onSubmit: SubmitHandler<CatsType> = async (data) => {
+    console.log(data, "data");
     await postCats(data);
   };
 
@@ -67,8 +73,8 @@ export default function FormTest() {
           <div>gender: </div>
 
           <select {...register("gender", {})} className=" w-2/3 p-1 text-lg ">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value={CatGenders.MALE}>Male</option>
+            <option value={CatGenders.FEMALE}>Female</option>
           </select>
         </div>
         <div>

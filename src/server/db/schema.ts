@@ -11,6 +11,7 @@ import {
   bigint,
   varchar,
   boolean,
+  date,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -43,12 +44,12 @@ export const articles = createTable("article", {
 });
 
 export const cats = createTable("cat", {
-  id: bigint("id", { mode: "number" }).primaryKey(),
+  id: serial("id").primaryKey(),
   name: varchar("name", { length: 128 }).notNull(),
   image: varchar("image", { length: 255 }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   gender: varchar("gender", { length: 10 }),
-  dateOfBirth: timestamp("dateOfBirth").notNull(),
+  dateOfBirth: date("dateOfBirth").notNull(),
   isDOBEstimated: boolean("is_DOB_Estimated").notNull(),
   colour: varchar("colour", { length: 50 }).notNull(),
   furLength: varchar("fur_length", { length: 100 }),

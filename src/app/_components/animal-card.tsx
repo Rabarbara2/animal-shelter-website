@@ -3,18 +3,31 @@ import MaleSymbol from "../assets/male-symbol";
 import FemaleSymbol from "../assets/female-symbol";
 import { RouterOutputs } from "~/trpc/shared";
 import Link from "next/link";
+import { CatsResponse } from "~/server/queries";
 
 type Cat = RouterOutputs["cat"]["getAll"]["0"];
 type HealthIssues = RouterOutputs["healthIssue"]["getAll"];
 
 type AnimalCardProps = {
-  cat: Cat;
+  cat: CatsResponse["0"];
   healthIssues: HealthIssues;
 };
 
 export default function AnimalCard({
-  cat: { image, gender, name, catHealthRecords },
   healthIssues,
+  cat: {
+    catHealthRecords,
+    colour,
+    createdAt,
+    dateOfBirth,
+    furLength,
+    gender,
+    id,
+    image,
+    isDOBEstimated,
+    name,
+    race,
+  },
 }: AnimalCardProps) {
   return (
     <Link
@@ -32,7 +45,7 @@ export default function AnimalCard({
       <div className="flex items-center justify-center">
         <div className=" p-4 text-2xl font-semibold">{name}</div>
         <div>
-          {gender === "Male" ? (
+          {gender === "male" ? (
             <MaleSymbol className="h-8 w-8 bg-clip-content fill-blue-400" />
           ) : (
             <FemaleSymbol className=" h-10 w-10 bg-clip-content fill-pink-400" />
