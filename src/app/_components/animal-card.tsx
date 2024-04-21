@@ -4,6 +4,7 @@ import FemaleSymbol from "../assets/female-symbol";
 import { RouterOutputs } from "~/trpc/shared";
 import Link from "next/link";
 import { CatsResponse } from "~/server/queries";
+import { CatGenders } from "~/server/db/schema";
 
 type Cat = RouterOutputs["cat"]["getAll"]["0"];
 type HealthIssues = RouterOutputs["healthIssue"]["getAll"];
@@ -17,16 +18,10 @@ export default function AnimalCard({
   healthIssues,
   cat: {
     catHealthRecords,
-    colour,
-    createdAt,
-    dateOfBirth,
-    furLength,
+
     gender,
-    id,
     image,
-    isDOBEstimated,
     name,
-    race,
   },
 }: AnimalCardProps) {
   return (
@@ -45,7 +40,7 @@ export default function AnimalCard({
       <div className="flex items-center justify-center">
         <div className=" p-4 text-2xl font-semibold">{name}</div>
         <div>
-          {gender === "male" ? (
+          {gender === CatGenders.MALE ? (
             <MaleSymbol className="h-8 w-8 bg-clip-content fill-blue-400" />
           ) : (
             <FemaleSymbol className=" h-10 w-10 bg-clip-content fill-pink-400" />

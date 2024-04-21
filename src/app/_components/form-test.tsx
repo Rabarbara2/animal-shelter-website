@@ -2,14 +2,11 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import { db } from "~/server/db";
-import { CatsType, cats } from "~/server/db/schema";
+import { CatGenders, CatsType, cats } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 import { postCats } from "~/server/queries";
-
-enum CatGenders {
-  MALE = "Male",
-  FEMALE = "Female",
-}
+import { redirect } from "next/navigation";
+import React from "react";
 
 type Inputs = {
   name: string;
@@ -27,12 +24,21 @@ export default function FormTest() {
     register,
     handleSubmit,
     watch,
-    formState: { errors },
+    reset,
+    formState: { isSubmitting, isSubmitSuccessful },
   } = useForm<CatsType>();
   const onSubmit: SubmitHandler<CatsType> = async (data) => {
-    console.log(data, "data");
     await postCats(data);
   };
+
+  React.useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+      redirect("/");
+    }
+  });
+
+  console.log(isSubmitting);
 
   const imageUrl = watch("image");
 
@@ -116,20 +122,21 @@ export default function FormTest() {
 
         <input
           type="submit"
-          className="w-fit cursor-pointer rounded bg-lime-500 p-3"
+          disabled={isSubmitting}
+          className="w-fit cursor-pointer rounded bg-lime-500 p-3 disabled:bg-slate-500"
           value="submit"
         />
       </form>
       <div className="flex w-1/2 flex-col items-center justify-center gap-4 text-3xl text-white">
         Image Preview
-        <div className="relative h-96 w-96">
+        <div className="relative h-72 w-64">
           {imageUrl && (
             <Image
               src={imageUrl}
               alt="bad image"
               fill
               loader={(loader) => loader.src}
-              className="h-1/2 w-1/2 text-base"
+              className="🐷 h-72 w-64 rounded border-b border-slate-800 object-cover"
             />
           )}
         </div>

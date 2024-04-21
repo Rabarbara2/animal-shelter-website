@@ -33,7 +33,6 @@ export async function getCats() {
       catHealthRecords: true,
     },
     orderBy: (model, { desc }) => desc(model.id),
-    limit: 3,
   });
 
   return cats;
