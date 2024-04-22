@@ -1,17 +1,14 @@
 import Image from "next/image";
 import MaleSymbol from "../assets/male-symbol";
 import FemaleSymbol from "../assets/female-symbol";
-import { RouterOutputs } from "~/trpc/shared";
+import type { RouterOutputs } from "~/trpc/shared";
 import Link from "next/link";
-import { CatsResponse } from "~/server/queries";
+import type { CatsResponse, HealthIssueResponse } from "~/server/queries";
 import { CatGenders } from "~/server/db/schema";
-
-type Cat = RouterOutputs["cat"]["getAll"]["0"];
-type HealthIssues = RouterOutputs["healthIssue"]["getAll"];
 
 type AnimalCardProps = {
   cat: CatsResponse["0"];
-  healthIssues: HealthIssues;
+  healthIssues: HealthIssueResponse;
 };
 
 export default function AnimalCard({

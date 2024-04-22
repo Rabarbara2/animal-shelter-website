@@ -1,6 +1,5 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { articleRouter } from "./routers/article";
-import { catRouter } from "./cat";
 import { healthIssueRouter } from "./healthIssue";
 
 /**
@@ -10,7 +9,6 @@ import { healthIssueRouter } from "./healthIssue";
  */
 export const appRouter = createTRPCRouter({
   article: articleRouter,
-  cat: catRouter,
   healthIssue: healthIssueRouter,
 });
 

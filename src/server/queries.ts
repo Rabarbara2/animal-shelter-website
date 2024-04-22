@@ -39,6 +39,7 @@ export async function getCats() {
 }
 
 export type CatsResponse = Awaited<ReturnType<typeof getCats>>;
+export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 
 export async function postCats(params: CatsType) {
   console.log({ ...params, id: cats.id.default }, "params");
