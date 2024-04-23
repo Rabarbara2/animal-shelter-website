@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
 import { getCats, getHealthIssues } from "~/server/queries";
