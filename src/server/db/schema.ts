@@ -185,3 +185,4 @@ export enum CatGenders {
 export const insertCatsSchema = createInsertSchema(cats);
 
 export type CatsType = typeof cats.$inferInsert;
+export type ArticlesType = typeof articles.$inferInsert;

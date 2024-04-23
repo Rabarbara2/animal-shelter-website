@@ -1,7 +1,6 @@
 import Image from "next/image";
 import MaleSymbol from "../assets/male-symbol";
 import FemaleSymbol from "../assets/female-symbol";
-import type { RouterOutputs } from "~/trpc/shared";
 import Link from "next/link";
 import type { CatsResponse, HealthIssueResponse } from "~/server/queries";
 import { CatGenders } from "~/server/db/schema";

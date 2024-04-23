@@ -1,6 +1,6 @@
-import Link from "next/link";
+export const dynamic = "force-dynamic";
+
 import NewsCard from "../_components/news-card";
-import { api } from "~/trpc/server";
 import Navbar from "../_components/navbar";
 import { getArticles } from "~/server/queries";
 
