@@ -1,23 +1,10 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
-import { db } from "~/server/db";
-import { CatGenders, CatsType, cats } from "~/server/db/schema";
-import { api } from "~/trpc/react";
+import { CatGenders, CatsType } from "~/server/db/schema";
 import { postCats } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
-
-type Inputs = {
-  name: string;
-  colour: string;
-  imageLink: string;
-  gender: string;
-  dateOfBirth: Date;
-  estimated: boolean;
-  race: string;
-  furLength: string;
-};
 
 export default function FormTest() {
   const {
@@ -36,9 +23,7 @@ export default function FormTest() {
       reset();
       redirect("/");
     }
-  });
-
-  console.log(isSubmitting);
+  }, [isSubmitSuccessful, reset]);
 
   const imageUrl = watch("image");
 
@@ -87,7 +72,7 @@ export default function FormTest() {
           <div>date of birth: </div>
 
           <input
-            type="date"
+            type="month"
             {...register("dateOfBirth", {})}
             className=" w-2/3 p-1 text-lg"
           />
