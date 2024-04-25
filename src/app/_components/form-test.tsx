@@ -5,6 +5,7 @@ import { CatGenders, CatsType } from "~/server/db/schema";
 import { postCats } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
+import { revalidatePath } from "next/cache";
 
 export default function FormTest() {
   const {

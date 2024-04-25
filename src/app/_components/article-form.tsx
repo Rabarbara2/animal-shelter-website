@@ -6,6 +6,8 @@ import { postArticle, postCats } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
 import { date } from "drizzle-orm/pg-core";
+import { revalidatePath } from "next/cache";
+import { UploadButton } from "../utils/uploadthing";
 
 export default function ArticleForm() {
   const {
@@ -58,6 +60,8 @@ export default function ArticleForm() {
         </div>
         <input type="submit" value="submit" className="bg-purple-400 p-5" />
       </form>
+
+      <UploadButton endpoint="imageUploader" />
     </div>
   );
 }
