@@ -12,6 +12,9 @@ const config = {
         hostname: "media.discordapp.net",
       },
       {
+        hostname: "utfs.io",
+      },
+      {
         hostname: "cdn.discordapp.com",
       },
     ],

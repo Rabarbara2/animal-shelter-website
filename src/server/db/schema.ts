@@ -43,6 +43,11 @@ export const articles = createTable("article", {
   text: text("text").notNull(),
 });
 
+export const catImages = createTable("catImages", {
+  id: serial("id").primaryKey(),
+  url: varchar("url").notNull(),
+});
+
 export const cats = createTable("cat", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 128 }).notNull(),

@@ -38,6 +38,14 @@ export async function getCats() {
   return cats;
 }
 
+export async function getCatImages() {
+  const images = await db.query.catImages.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  return images;
+}
+
 export type CatsResponse = Awaited<ReturnType<typeof getCats>>;
 export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 

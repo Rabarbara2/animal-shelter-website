@@ -6,6 +6,7 @@ import { postCats } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
 import { revalidatePath } from "next/cache";
+import ImageTest from "./image-test";
 
 export default function FormTest() {
   const {

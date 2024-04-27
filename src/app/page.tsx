@@ -8,6 +8,7 @@ import MainPageAdopt from "./_components/main-page-adopt";
 
 import NewsSection from "./_components/news-section";
 import Footer from "./_components/footer";
+import ImageTest from "./_components/image-test";
 
 export default async function Home() {
   noStore();
