@@ -14,6 +14,7 @@ import {
   date,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
+import Cats from "~/app/adoption/cats/page";
 
 export const db = drizzle(sql);
 
@@ -44,7 +45,9 @@ export const articles = createTable("article", {
 });
 
 export const catImages = createTable("catImages", {
-  id: serial("id").primaryKey(),
+  id: serial("id")
+    .primaryKey()
+    .references(() => cats.image),
   url: varchar("url").notNull(),
 });
 
@@ -60,6 +63,9 @@ export const cats = createTable("cat", {
   furLength: varchar("fur_length", { length: 100 }),
   race: varchar("race", { length: 50 }).notNull(),
 });
+export const catImageRelation = relations(cats, ({ one }) => ({
+  catImages: one(catImages),
+}));
 
 export const healthIssues = createTable("health_issue", {
   id: serial("id").primaryKey(),
