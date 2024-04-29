@@ -12,13 +12,7 @@ type AnimalCardProps = {
 
 export default function AnimalCard({
   healthIssues,
-  cat: {
-    catHealthRecords,
-
-    gender,
-    image,
-    name,
-  },
+  cat: { gender, catHealthRecords, image, name },
 }: AnimalCardProps) {
   return (
     <Link

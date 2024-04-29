@@ -29,10 +29,14 @@ export async function getHealthIssues() {
 
 export async function getCats() {
   const cats = await db.query.cats.findMany({
+    with: { catHealthRecords: true },
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  const cats2 = await db.query.cats.findFirst({
     with: {
       catHealthRecords: true,
     },
-    orderBy: (model, { desc }) => desc(model.id),
   });
 
   return cats;
@@ -40,6 +44,7 @@ export async function getCats() {
 
 export async function getCatImages() {
   const images = await db.query.catImages.findMany({
+    with: {},
     orderBy: (model, { desc }) => desc(model.id),
   });
 

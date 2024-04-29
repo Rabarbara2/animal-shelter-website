@@ -60,19 +60,12 @@ export default function ArticleForm() {
         </div>
         <input type="submit" value="submit" className="bg-purple-400 p-5" />
       </form>
-
-      <UploadButton
-        endpoint="catImageUploader"
-        onClientUploadComplete={(res) => {
-          const fileUrl = res[0]?.url;
-        }}
-      />
     </div>
   );
 }
 
 /* DO ZROBIENIA
-- zrobić galerie obrazków z osobną tabelką
-- połączyć ją z kotami
+x zrobić galerie obrazków z osobną tabelką 
+x połączyć ją z kotami
 - przy dodawaniu kota w forularzu włączać galerie obrazków i pozwalać wybrać jeden jako obrazek kota
 -  */

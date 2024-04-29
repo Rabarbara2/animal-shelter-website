@@ -12,9 +12,9 @@ import {
   varchar,
   boolean,
   date,
+  integer,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
-import Cats from "~/app/adoption/cats/page";
 
 export const db = drizzle(sql);
 
@@ -44,13 +44,6 @@ export const articles = createTable("article", {
   text: text("text").notNull(),
 });
 
-export const catImages = createTable("catImages", {
-  id: serial("id")
-    .primaryKey()
-    .references(() => cats.image),
-  url: varchar("url").notNull(),
-});
-
 export const cats = createTable("cat", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 128 }).notNull(),
@@ -63,9 +56,12 @@ export const cats = createTable("cat", {
   furLength: varchar("fur_length", { length: 100 }),
   race: varchar("race", { length: 50 }).notNull(),
 });
-export const catImageRelation = relations(cats, ({ one }) => ({
-  catImages: one(catImages),
-}));
+
+export const dupaKota = createTable("dupaKot", {
+  catId: bigint("cat_id", {
+    mode: "bigint",
+  }).references(() => cats.id),
+});
 
 export const healthIssues = createTable("health_issue", {
   id: serial("id").primaryKey(),
@@ -91,8 +87,22 @@ export const catHealthRecords = createTable("cat_health_record", {
   testedAt: timestamp("tested_at"),
 });
 
-export const catRelations = relations(cats, ({ many }) => ({
+export const catImages = createTable("catImage", {
+  catId: bigint("cat_id", {
+    mode: "bigint",
+  })
+    .references(() => cats.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .notNull(),
+  url: varchar("url").notNull(),
+});
+
+export const catRelations = relations(cats, ({ many, one }) => ({
   catHealthRecords: many(catHealthRecords),
+  catImages: one(catImages),
+  dupa: many(dupaKota),
 }));
 
 export const healthIssuesRelations = relations(cats, ({ many }) => ({
