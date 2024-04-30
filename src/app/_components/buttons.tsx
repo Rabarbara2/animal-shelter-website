@@ -9,7 +9,7 @@ const items = [
   {
     image: adopt,
     text: "Meet our wonderful animals and get a new amazing friend today!",
-    link: "/adopt",
+    link: "/adoption",
     title: "Adopt",
   },
   {
