@@ -1,8 +1,8 @@
 "use server";
 "server only";
 import { db } from "./db";
-import { articles, cats } from "./db/schema";
-import type { ArticlesType, CatsType } from "./db/schema";
+import { articles, animals } from "./db/schema";
+import type { ArticlesType, AnimalsType } from "./db/schema";
 
 export async function getArticles() {
   const allArticles = await db.query.articles.findMany({
@@ -27,37 +27,30 @@ export async function getHealthIssues() {
   return issues;
 }
 
-export async function getCats() {
-  const cats = await db.query.cats.findMany({
-    with: { catHealthRecords: true },
-    orderBy: (model, { desc }) => desc(model.id),
+export async function getAnimals() {
+  const animals = await db.query.animals.findMany({
+    with: { animalHealthRecords: true, animalImages: true },
   });
 
-  const cats2 = await db.query.cats.findFirst({
-    with: {
-      catHealthRecords: true,
-    },
-  });
-
-  return cats;
+  return animals;
 }
 
-export async function getCatImages() {
-  const images = await db.query.catImages.findMany({
+export async function getAnimalImages() {
+  const images = await db.query.animalImages.findMany({
     with: {},
-    orderBy: (model, { desc }) => desc(model.id),
+    orderBy: (model, { desc }) => desc(model.animalId),
   });
 
   return images;
 }
 
-export type CatsResponse = Awaited<ReturnType<typeof getCats>>;
+export type AnimalsResponse = Awaited<ReturnType<typeof getAnimals>>;
 export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 
-export async function postCats(params: CatsType) {
-  await db.insert(cats).values({
+export async function postAnimals(params: AnimalsType) {
+  await db.insert(animals).values({
     ...params,
-    id: cats.id.default,
+    id: animals.id.default,
   });
 }
 export async function postArticle(params: ArticlesType) {

@@ -20,23 +20,7 @@ export const db = drizzle(sql);
 
 export const createTable = pgTableCreator((name) => `asw_${name}`);
 
-// export const posts = createTable(
-//   "post",
-//   {
-//     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-//     name: varchar("name", { length: 256 }),
-//     createdById: varchar("createdById", { length: 255 }).notNull(),
-//     createdAt: timestamp("created_at")
-//       .default(sql`CURRENT_TIMESTAMP`)
-//       .notNull(),
-//     updatedAt: timestamp("updatedAt").onUpdateNow(),
-//   },
-//   (example) => ({
-//     createdByIdIdx: index("createdById_idx").on(example.createdById),
-//     nameIndex: index("name_idx").on(example.name),
-//   }),
-// );
-export const articles = createTable("article", {
+export const articles = createTable("articles", {
   id: serial("id").primaryKey(),
   category: varchar("category", { length: 128 }).notNull(),
   createdById: varchar("createdById", { length: 255 }).notNull(),
@@ -44,36 +28,47 @@ export const articles = createTable("article", {
   text: text("text").notNull(),
 });
 
-export const cats = createTable("cat", {
+export const animals = createTable("animals", {
   id: serial("id").primaryKey(),
+  type: varchar("type", { length: 128 }).notNull(),
   name: varchar("name", { length: 128 }).notNull(),
-  image: varchar("image", { length: 255 }).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   gender: varchar("gender", { length: 10 }),
   dateOfBirth: date("dateOfBirth").notNull(),
-  isDOBEstimated: boolean("is_DOB_Estimated").notNull(),
   colour: varchar("colour", { length: 50 }).notNull(),
   furLength: varchar("fur_length", { length: 100 }),
   race: varchar("race", { length: 50 }).notNull(),
 });
 
-export const dupaKota = createTable("dupaKot", {
-  catId: bigint("cat_id", {
+export const animalsRelations = relations(animals, ({ one, many }) => ({
+  animalImages: one(animalImages),
+  animalHealthRecords: many(animalHealthRecords),
+}));
+
+export const animalImages = createTable("animal_image", {
+  animalId: bigint("animal_id", {
     mode: "bigint",
-  }).references(() => cats.id),
+  })
+    .references(() => animals.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    })
+    .notNull(),
+  url: varchar("url").notNull(),
 });
 
 export const healthIssues = createTable("health_issue", {
   id: serial("id").primaryKey(),
   name: varchar("name", { length: 100 }).notNull(),
-  type: varchar("type", { length: 10 }).notNull(),
+  type: varchar("type", { length: 16 }).notNull(),
+  animalType: varchar("type", { length: 16 }).notNull(),
 });
 
-export const catHealthRecords = createTable("cat_health_record", {
-  catId: bigint("cat_id", {
+export const animalHealthRecords = createTable("animal_health_record", {
+  animalId: bigint("animal_id", {
     mode: "bigint",
   })
-    .references(() => cats.id, {
+    .references(() => animals.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     })
@@ -87,37 +82,15 @@ export const catHealthRecords = createTable("cat_health_record", {
   testedAt: timestamp("tested_at"),
 });
 
-export const catImages = createTable("catImage", {
-  catId: bigint("cat_id", {
-    mode: "bigint",
-  })
-    .references(() => cats.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    })
-    .notNull(),
-  url: varchar("url").notNull(),
-});
-
-export const catRelations = relations(cats, ({ many, one }) => ({
-  catHealthRecords: many(catHealthRecords),
-  catImages: one(catImages),
-  dupa: many(dupaKota),
-}));
-
-export const healthIssuesRelations = relations(cats, ({ many }) => ({
-  catHealthRecords: many(catHealthRecords),
-}));
-
-export const catsToHealthIssuesRelations = relations(
-  catHealthRecords,
+export const animalsToHealthIssuesRelations = relations(
+  animalHealthRecords,
   ({ one }) => ({
-    cat: one(cats, {
-      fields: [catHealthRecords.catId],
-      references: [cats.id],
+    animals: one(animals, {
+      fields: [animalHealthRecords.animalId],
+      references: [animals.id],
     }),
     healthIssue: one(healthIssues, {
-      fields: [catHealthRecords.healthIssueId],
+      fields: [animalHealthRecords.healthIssueId],
       references: [healthIssues.id],
     }),
   }),
@@ -128,82 +101,7 @@ export enum CatGenders {
   FEMALE = "Female",
 }
 
-// export const users = createTable("user", {
-//   id: varchar("id", { length: 255 }).notNull().primaryKey(),
-//   name: varchar("name", { length: 255 }),
-//   email: varchar("email", { length: 255 }).notNull(),
-//   emailVerified: timestamp("emailVerified", {
-//     mode: "date",
-//     fsp: 3,
-//   }).defaultNow(),
-//   image: varchar("image", { length: 255 }),
-// });
+export const insertAnimalsSchema = createInsertSchema(animals);
 
-// export const usersRelations = relations(users, ({ many }) => ({
-//   accounts: many(accounts),
-//   sessions: many(sessions),
-// }));
-
-// export const accounts = createTable(
-//   "account",
-//   {
-//     userId: varchar("userId", { length: 255 }).notNull(),
-//     type: varchar("type", { length: 255 })
-//       .$type<AdapterAccount["type"]>()
-//       .notNull(),
-//     provider: varchar("provider", { length: 255 }).notNull(),
-//     providerAccountId: varchar("providerAccountId", { length: 255 }).notNull(),
-//     refresh_token: text("refresh_token"),
-//     access_token: text("access_token"),
-//     expires_at: int("expires_at"),
-//     token_type: varchar("token_type", { length: 255 }),
-//     scope: varchar("scope", { length: 255 }),
-//     id_token: text("id_token"),
-//     session_state: varchar("session_state", { length: 255 }),
-//   },
-//   (account) => ({
-//     compoundKey: primaryKey({
-//       columns: [account.provider, account.providerAccountId],
-//     }),
-//     userIdIdx: index("accounts_userId_idx").on(account.userId),
-//   }),
-// );
-
-// export const accountsRelations = relations(accounts, ({ one }) => ({
-//   user: one(users, { fields: [accounts.userId], references: [users.id] }),
-// }));
-
-// export const sessions = createTable(
-//   "session",
-//   {
-//     sessionToken: varchar("sessionToken", { length: 255 })
-//       .notNull()
-//       .primaryKey(),
-//     userId: varchar("userId", { length: 255 }).notNull(),
-//     expires: timestamp("expires", { mode: "date" }).notNull(),
-//   },
-//   (session) => ({
-//     userIdIdx: index("session_userId_idx").on(session.userId),
-//   }),
-// );
-
-// export const sessionsRelations = relations(sessions, ({ one }) => ({
-//   user: one(users, { fields: [sessions.userId], references: [users.id] }),
-// }));
-
-// export const verificationTokens = createTable(
-//   "verificationToken",
-//   {
-//     identifier: varchar("identifier", { length: 255 }).notNull(),
-//     token: varchar("token", { length: 255 }).notNull(),
-//     expires: timestamp("expires", { mode: "date" }).notNull(),
-//   },
-//   (vt) => ({
-//     compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-//   }),
-// );
-
-export const insertCatsSchema = createInsertSchema(cats);
-
-export type CatsType = typeof cats.$inferInsert;
+export type AnimalsType = typeof animals.$inferInsert;
 export type ArticlesType = typeof articles.$inferInsert;
