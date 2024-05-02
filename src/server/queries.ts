@@ -38,7 +38,7 @@ export async function getAnimals() {
 export async function getAnimalImages() {
   const images = await db.query.animalImages.findMany({
     with: {},
-    orderBy: (model, { desc }) => desc(model.animalId),
+    orderBy: (model, { desc }) => desc(model.id),
   });
 
   return images;

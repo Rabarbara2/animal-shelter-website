@@ -46,6 +46,7 @@ export const animalsRelations = relations(animals, ({ one, many }) => ({
 }));
 
 export const animalImages = createTable("animal_image", {
+  id: serial("id"),
   animalId: bigint("animal_id", {
     mode: "bigint",
   })
