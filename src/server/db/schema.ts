@@ -41,7 +41,10 @@ export const animals = createTable("animals", {
 });
 
 export const animalsRelations = relations(animals, ({ one, many }) => ({
-  animalImages: one(animalImages),
+  animalImages: one(animalImages, {
+    fields: [animals.id],
+    references: [animalImages.animalId],
+  }),
   animalHealthRecords: many(animalHealthRecords),
 }));
 
@@ -57,6 +60,13 @@ export const animalImages = createTable("animal_image", {
     .notNull(),
   url: varchar("url").notNull(),
 });
+
+export const animalImagesRelations = relations(animalImages, ({ one }) => ({
+  animals: one(animals, {
+    fields: [animalImages.animalId],
+    references: [animals.id],
+  }),
+}));
 
 export const healthIssues = createTable("health_issue", {
   id: serial("id").primaryKey(),
@@ -97,9 +107,10 @@ export const animalsToHealthIssuesRelations = relations(
   }),
 );
 
-export enum CatGenders {
+export enum AnimalGenders {
   MALE = "Male",
   FEMALE = "Female",
+  OTHER = "Other",
 }
 
 export const insertAnimalsSchema = createInsertSchema(animals);

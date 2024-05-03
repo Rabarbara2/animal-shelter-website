@@ -45,6 +45,7 @@ export async function getAnimalImages() {
 }
 
 export type AnimalsResponse = Awaited<ReturnType<typeof getAnimals>>;
+export type ImagesResponse = Awaited<ReturnType<typeof getAnimalImages>>;
 export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 
 export async function postAnimals(params: AnimalsType) {

@@ -1,13 +1,10 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import Image from "next/image";
-import { ArticlesType, CatGenders, CatsType } from "~/server/db/schema";
-import { postArticle, postCats } from "~/server/queries";
+
+import { ArticlesType } from "~/server/db/schema";
+import { postArticle, postAnimals } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
-import { date } from "drizzle-orm/pg-core";
-import { revalidatePath } from "next/cache";
-import { UploadButton } from "../utils/uploadthing";
 
 export default function ArticleForm() {
   const {

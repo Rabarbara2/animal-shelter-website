@@ -1,11 +1,12 @@
 export const dynamic = "force-dynamic";
 
+import { animalImages } from "~/server/db/schema";
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
-import { getCats, getHealthIssues } from "~/server/queries";
+import { getAnimals, getHealthIssues } from "~/server/queries";
 
 export default async function Cats() {
-  const allCats = await getCats();
+  const allCats = await getAnimals();
   const healthIssues = await getHealthIssues();
 
   return (
@@ -23,7 +24,11 @@ export default async function Cats() {
         <div className="mb-16 flex flex-wrap justify-center gap-8 p-6">
           {allCats.map((cat) => {
             return (
-              <AnimalCard key={cat.id} cat={cat} healthIssues={healthIssues} />
+              <AnimalCard
+                key={cat.id}
+                animal={cat}
+                healthIssues={healthIssues}
+              />
             );
           })}
         </div>
