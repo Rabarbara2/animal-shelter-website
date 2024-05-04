@@ -1,7 +1,9 @@
 "use server";
 "server only";
+
+import { eq } from "drizzle-orm";
 import { db } from "./db";
-import { articles, animals } from "./db/schema";
+import { articles, animals, animalImages } from "./db/schema";
 import type { ArticlesType, AnimalsType } from "./db/schema";
 
 export async function getArticles() {
@@ -49,14 +51,28 @@ export type ImagesResponse = Awaited<ReturnType<typeof getAnimalImages>>;
 export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 
 export async function postAnimals(params: AnimalsType) {
-  await db.insert(animals).values({
-    ...params,
-    id: animals.id.default,
-  });
+  const [result] = await db
+    .insert(animals)
+    .values({
+      ...params,
+      id: animals.id.default,
+    })
+    .returning({ id: animals.id });
+
+  return result;
 }
 export async function postArticle(params: ArticlesType) {
   await db.insert(articles).values({
     ...params,
     id: articles.id.default,
   });
+}
+export async function asignImagetoAnimal(
+  newAnimalId: ImagesResponse["0"]["animalId"],
+  imageId: ImagesResponse["0"]["id"],
+) {
+  await db
+    .update(animalImages)
+    .set({ animalId: newAnimalId })
+    .where(eq(animalImages.id, imageId));
 }

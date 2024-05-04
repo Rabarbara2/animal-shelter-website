@@ -1,8 +1,8 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
-import { CatGenders, CatsType } from "~/server/db/schema";
-import { postCats } from "~/server/queries";
+import { AnimalGenders, AnimalsType } from "~/server/db/schema";
+import { asignImagetoAnimal, postAnimals } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
 import { revalidatePath } from "next/cache";
@@ -14,9 +14,12 @@ export default function FormTest() {
     watch,
     reset,
     formState: { isSubmitting, isSubmitSuccessful },
-  } = useForm<CatsType>();
-  const onSubmit: SubmitHandler<CatsType> = async (data) => {
-    await postCats(data);
+  } = useForm<AnimalsType>();
+  const onSubmit: SubmitHandler<AnimalsType> = async (data) => {
+    const addedCat = await postAnimals(data);
+    if (addedCat?.id) {
+      await asignImagetoAnimal(addedCat.id, imageId); // TODO
+    }
   };
 
   React.useEffect(() => {
@@ -25,8 +28,6 @@ export default function FormTest() {
       redirect("/");
     }
   }, [isSubmitSuccessful, reset]);
-
-  const imageUrl = watch("image");
 
   return (
     <div className="flex w-5/6 items-center justify-center">
@@ -44,6 +45,16 @@ export default function FormTest() {
           />
         </div>
         <div>
+          <div>type:</div>
+
+          <input
+            defaultValue=""
+            {...register("type", {})}
+            className="  w-2/3 p-1 text-lg"
+          />
+        </div>
+
+        <div>
           <div>colour:</div>
 
           <input
@@ -54,38 +65,26 @@ export default function FormTest() {
         </div>
         <div>
           <div>image link: </div>
-
-          <input
-            defaultValue=""
-            {...register("image", {})}
-            className=" w-2/3 p-1 text-lg "
-          />
         </div>
         <div>
           <div>gender: </div>
 
           <select {...register("gender", {})} className=" w-2/3 p-1 text-lg ">
-            <option value={CatGenders.MALE}>Male</option>
-            <option value={CatGenders.FEMALE}>Female</option>
+            <option value={AnimalGenders.MALE}>Male</option>
+            <option value={AnimalGenders.FEMALE}>Female</option>
+            <option value={AnimalGenders.OTHER}>Other</option>
           </select>
         </div>
         <div>
           <div>date of birth: </div>
 
           <input
-            type="month"
+            type="date"
             {...register("dateOfBirth", {})}
             className=" w-2/3 p-1 text-lg"
           />
         </div>
-        <label>
-          estimated?
-          <input
-            type="checkbox"
-            {...register("isDOBEstimated", {})}
-            className="m-2 p-1 text-lg"
-          />
-        </label>
+
         <div>
           <div>fur length: </div>
           <select {...register("furLength", {})} className=" w-2/3 p-1 text-lg">
@@ -113,20 +112,7 @@ export default function FormTest() {
           value="submit"
         />
       </form>
-      <div className="flex w-1/2 flex-col items-center justify-center gap-4 text-3xl text-white">
-        Image Preview
-        <div className="relative h-72 w-64">
-          {imageUrl && (
-            <Image
-              src={imageUrl}
-              alt="bad image"
-              fill
-              loader={(loader) => loader.src}
-              className="🐷 h-72 w-64 rounded border-b border-slate-800 object-cover"
-            />
-          )}
-        </div>
-      </div>
+      <div className="flex w-1/2 flex-col items-center justify-center gap-4 text-3xl text-white"></div>
     </div>
   );
 }

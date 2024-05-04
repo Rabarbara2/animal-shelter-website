@@ -11,6 +11,7 @@ import {
   bigint,
   varchar,
   boolean,
+  numeric,
   date,
   integer,
 } from "drizzle-orm/pg-core";
@@ -50,14 +51,10 @@ export const animalsRelations = relations(animals, ({ one, many }) => ({
 
 export const animalImages = createTable("animal_image", {
   id: serial("id"),
-  animalId: bigint("animal_id", {
-    mode: "bigint",
-  })
-    .references(() => animals.id, {
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    })
-    .notNull(),
+  animalId: integer("animal_id").references(() => animals.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }),
   url: varchar("url").notNull(),
 });
 
@@ -76,17 +73,13 @@ export const healthIssues = createTable("health_issue", {
 });
 
 export const animalHealthRecords = createTable("animal_health_record", {
-  animalId: bigint("animal_id", {
-    mode: "bigint",
-  })
+  animalId: integer("animal_id")
     .references(() => animals.id, {
       onDelete: "cascade",
       onUpdate: "cascade",
     })
     .notNull(),
-  healthIssueId: bigint("health_issue_id", {
-    mode: "bigint",
-  })
+  healthIssueId: integer("health_issue_id")
     .references(() => healthIssues.id)
     .notNull(),
   vaccinatedAt: timestamp("vaccinated_at"),
