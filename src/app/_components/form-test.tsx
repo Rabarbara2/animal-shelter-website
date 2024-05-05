@@ -2,12 +2,17 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
 import { AnimalGenders, AnimalsType } from "~/server/db/schema";
-import { asignImagetoAnimal, postAnimals } from "~/server/queries";
+import {
+  asignImagetoAnimal,
+  postAnimals,
+  getAnimalImages,
+  ImagesResponse,
+} from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
 import { revalidatePath } from "next/cache";
 
-export default function FormTest() {
+export default function FormTest(props: { images: ImagesResponse }) {
   const {
     register,
     handleSubmit,
@@ -18,7 +23,7 @@ export default function FormTest() {
   const onSubmit: SubmitHandler<AnimalsType> = async (data) => {
     const addedCat = await postAnimals(data);
     if (addedCat?.id) {
-      await asignImagetoAnimal(addedCat.id, imageId); // TODO
+      await asignImagetoAnimal(addedCat.id, 8); // TODO
     }
   };
 
@@ -112,7 +117,15 @@ export default function FormTest() {
           value="submit"
         />
       </form>
-      <div className="flex w-1/2 flex-col items-center justify-center gap-4 text-3xl text-white"></div>
+      <div className="flex w-1/2 flex-col items-center justify-center gap-4 ">
+        {props.images.map((image) => {
+          return (
+            <div key={image.id}>
+              <Image src={image.url} alt="obrazek" height={200} width={200} />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

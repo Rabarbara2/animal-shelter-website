@@ -5,8 +5,10 @@ import Triangle from "../assets/triangle";
 
 import FormTest from "../_components/form-test";
 import ArticleForm from "../_components/article-form";
+import { getAnimalImages } from "~/server/queries";
 
 export default async function Aboutus() {
+  const images = await getAnimalImages();
   return (
     <div className="flex flex-col items-center bg-zinc-800">
       <Navbar />
@@ -25,7 +27,7 @@ export default async function Aboutus() {
         <Triangle fill="white" className="brightness-[70%]" />
       </div>
       <ArticleForm />
-      <FormTest />
+      <FormTest images={images} />
       <div className="h-96 w-5/6 bg-pink-900 p-12 text-lg text-white">
         At [Animal Shelter Name], we believe that every life is precious and
         deserving of love and care. Our dedicated team of staff and volunteers
