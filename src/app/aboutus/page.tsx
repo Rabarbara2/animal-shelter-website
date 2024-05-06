@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import obrazek from "../assets/animals.jpg";
 import Navbar from "../_components/navbar";
 import Image from "next/image";

@@ -12,18 +12,28 @@ import { redirect } from "next/navigation";
 import React from "react";
 import { revalidatePath } from "next/cache";
 
-export default function FormTest(props: { images: ImagesResponse }) {
+type FormTestProps = {
+  images: ImagesResponse;
+};
+
+type FormType = AnimalsType & {
+  imageId: number;
+};
+
+export default function FormTest({ images }: FormTestProps) {
   const {
     register,
     handleSubmit,
     watch,
     reset,
     formState: { isSubmitting, isSubmitSuccessful },
-  } = useForm<AnimalsType>();
-  const onSubmit: SubmitHandler<AnimalsType> = async (data) => {
-    const addedCat = await postAnimals(data);
+  } = useForm<FormType>();
+
+  const onSubmit: SubmitHandler<FormType> = async (data) => {
+    const { imageId, ...animalData } = data;
+    const addedCat = await postAnimals(animalData);
     if (addedCat?.id) {
-      await asignImagetoAnimal(addedCat.id, 8); // TODO
+      await asignImagetoAnimal(addedCat.id, imageId); // TODO
     }
   };
 
@@ -116,16 +126,17 @@ export default function FormTest(props: { images: ImagesResponse }) {
           className="w-fit cursor-pointer rounded bg-lime-500 p-3 disabled:bg-slate-500"
           value="submit"
         />
-      </form>
-      <div className="flex w-1/2 flex-col items-center justify-center gap-4 ">
-        {props.images.map((image) => {
+
+        {images.map((image) => {
           return (
-            <div key={image.id}>
-              <Image src={image.url} alt="obrazek" height={200} width={200} />
-            </div>
+            <label key={image.id}>
+              <input type="radio" value={image.id} {...register("imageId")} />
+
+              <Image src={image.url} alt="obrazek" width={288} height={384} />
+            </label>
           );
         })}
-      </div>
+      </form>
     </div>
   );
 }

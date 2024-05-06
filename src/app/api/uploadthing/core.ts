@@ -1,6 +1,6 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { catImages, db } from "~/server/db/schema";
+import { animalImages, db } from "~/server/db/schema";
 
 const f = createUploadthing();
 
@@ -11,7 +11,7 @@ export const ourFileRouter = {
     // Set permissions and file types for this FileRoute
     .onUploadComplete(async ({ file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      await db.insert(catImages).values({
+      await db.insert(animalImages).values({
         url: file.url,
       });
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
