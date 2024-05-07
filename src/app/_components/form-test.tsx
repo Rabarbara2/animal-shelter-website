@@ -129,8 +129,13 @@ export default function FormTest({ images }: FormTestProps) {
 
         {images.map((image) => {
           return (
-            <label key={image.id}>
-              <input type="radio" value={image.id} {...register("imageId")} />
+            <label key={image.id} className="relative">
+              <input
+                type="radio"
+                value={image.id}
+                {...register("imageId")}
+                className="absolute m-2"
+              />
 
               <Image src={image.url} alt="obrazek" width={288} height={384} />
             </label>

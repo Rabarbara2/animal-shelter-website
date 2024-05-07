@@ -50,7 +50,7 @@ export const animalsRelations = relations(animals, ({ one, many }) => ({
 }));
 
 export const animalImages = createTable("animal_image", {
-  id: serial("id"),
+  id: serial("id").primaryKey(),
   animalId: integer("animal_id").references(() => animals.id, {
     onDelete: "cascade",
     onUpdate: "cascade",
