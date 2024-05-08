@@ -32,6 +32,7 @@ export async function getHealthIssues() {
 export async function getAnimals() {
   const animals = await db.query.animals.findMany({
     with: { animalHealthRecords: true, animalImages: true },
+    orderBy: (model, { desc }) => desc(model.id),
   });
 
   return animals;
