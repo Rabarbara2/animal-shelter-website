@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { animalImages, db } from "~/server/db/schema";
@@ -14,6 +15,7 @@ export const ourFileRouter = {
       await db.insert(animalImages).values({
         url: file.url,
       });
+
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
       return { fileUrl: file.url };
     }),

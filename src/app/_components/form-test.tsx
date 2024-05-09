@@ -8,7 +8,7 @@ import {
   getAnimalImages,
   ImagesResponse,
 } from "~/server/queries";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React from "react";
 
 import { OurFileRouter } from "../api/uploadthing/core";
@@ -23,6 +23,7 @@ type FormType = AnimalsType & {
 };
 
 export default function FormTest({ images }: FormTestProps) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -32,12 +33,16 @@ export default function FormTest({ images }: FormTestProps) {
   } = useForm<FormType>();
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
-    const { imageId, ...animalData } = data;
-    const addedCat = await postAnimals(animalData);
+    const { imageId, dateOfBirth, ...animalData } = data;
+    const addedCat = await postAnimals({
+      ...animalData,
+      dateOfBirth: new Date(dateOfBirth).toJSON(),
+    });
     if (addedCat?.id) {
       await asignImagetoAnimal(addedCat.id, imageId); // TODO
     }
   };
+  console.log(watch("dateOfBirth"), new Date(watch("dateOfBirth")).toJSON());
 
   React.useEffect(() => {
     if (isSubmitSuccessful) {
@@ -56,7 +61,11 @@ export default function FormTest({ images }: FormTestProps) {
           <div className="w-full">
             <div>name:</div>
             <input
+              autoComplete="off"
               defaultValue=""
+              minLength={7}
+              required
+              about="miau"
               {...register("name", {})}
               className="w-full p-1 text-lg"
             />
@@ -96,7 +105,7 @@ export default function FormTest({ images }: FormTestProps) {
             <div>date of birth: </div>
 
             <input
-              type="date"
+              type="month"
               {...register("dateOfBirth", {})}
               className=" w-full p-1 text-lg"
             />
@@ -126,19 +135,21 @@ export default function FormTest({ images }: FormTestProps) {
           </div>
         </div>
 
-        <div className="flex basis-1/2 flex-col gap-4 p-6 text-xl">
+        <div className="flex h-fit basis-1/2 flex-col gap-4 p-6 text-xl">
           Upload image:
           <UploadDropzone
+            className="rounded-2xl bg-slate-400 p-6"
             endpoint="animalImageUploader"
-            onUploadError={() => {
-              alert("upload error");
+            onUploadError={(error) => {
+              alert(error);
             }}
             onClientUploadComplete={() => {
-              location.reload();
+              router.refresh();
             }}
           />
         </div>
       </div>
+      <div className="w-full p-5 text-xl">Choose image:</div>
       <div className=" grid grid-cols-4 gap-4 p-4">
         {images.map((image) => {
           return (
