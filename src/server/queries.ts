@@ -68,6 +68,10 @@ export async function postArticle(params: ArticlesType) {
     id: articles.id.default,
   });
 }
+
+export async function deleteImage(imageId: ImagesResponse["0"]["id"]) {
+  await db.delete(animalImages).where(eq(animalImages.id, imageId));
+}
 export async function asignImagetoAnimal(
   newAnimalId: ImagesResponse["0"]["animalId"],
   imageId: ImagesResponse["0"]["id"],

@@ -7,12 +7,14 @@ import {
   postAnimals,
   getAnimalImages,
   ImagesResponse,
+  deleteImage,
 } from "~/server/queries";
 import { redirect, useRouter } from "next/navigation";
 import React from "react";
 
 import { OurFileRouter } from "../api/uploadthing/core";
 import { UploadButton, UploadDropzone } from "../utils/uploadthing";
+import Buttons from "./buttons";
 
 type FormTestProps = {
   images: ImagesResponse;
@@ -138,7 +140,7 @@ export default function FormTest({ images }: FormTestProps) {
         <div className="flex h-fit basis-1/2 flex-col gap-4 p-6 text-xl">
           Upload image:
           <UploadDropzone
-            className="rounded-2xl bg-slate-400 p-6"
+            className="rounded-2xl bg-slate-400 p-6 hover:cursor-pointer [&_label]:text-black hover:[&_label]:text-gray-800 [&_svg]:text-gray-100"
             endpoint="animalImageUploader"
             onUploadError={(error) => {
               alert(error);
@@ -160,7 +162,15 @@ export default function FormTest({ images }: FormTestProps) {
                 {...register("imageId")}
                 className="absolute m-2 scale-150"
               />
-
+              <div
+                className="absolute right-2 font-bold text-red-500 "
+                onClick={async () => {
+                  await deleteImage(image.id);
+                  router.refresh();
+                }}
+              >
+                DELETE
+              </div>
               <Image
                 src={image.url}
                 alt="obrazek"
