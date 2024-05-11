@@ -152,7 +152,7 @@ export default function FormTest({ images }: FormTestProps) {
         </div>
       </div>
       <div className="w-full p-5 text-xl">Choose image:</div>
-      <div className=" grid grid-cols-4 gap-4 p-4">
+      <div className="flex flex-wrap justify-center gap-4 p-4">
         {images.map((image) => {
           return (
             <label key={image.id} className="relative w-fit">
@@ -174,7 +174,7 @@ export default function FormTest({ images }: FormTestProps) {
               <Image
                 src={image.url}
                 alt="obrazek"
-                width={288}
+                width={275}
                 height={384}
                 className="h-full max-h-64 rounded-md object-cover"
               />
