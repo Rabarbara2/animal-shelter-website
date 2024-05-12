@@ -15,6 +15,8 @@ import React from "react";
 import { OurFileRouter } from "../api/uploadthing/core";
 import { UploadButton, UploadDropzone } from "../utils/uploadthing";
 import Buttons from "./buttons";
+import FemaleSymbol from "../assets/female-symbol";
+import TrashBinIcon from "../assets/trash-bin";
 
 type FormTestProps = {
   images: ImagesResponse;
@@ -162,15 +164,13 @@ export default function FormTest({ images }: FormTestProps) {
                 {...register("imageId")}
                 className="absolute m-2 scale-150"
               />
-              <div
-                className="absolute right-2 font-bold text-red-500 "
+              <TrashBinIcon
+                className="absolute right-0 m-2 h-6 fill-red-500 font-bold"
                 onClick={async () => {
                   await deleteImage(image.id);
                   router.refresh();
                 }}
-              >
-                DELETE
-              </div>
+              ></TrashBinIcon>
               <Image
                 src={image.url}
                 alt="obrazek"

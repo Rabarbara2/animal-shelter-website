@@ -61,8 +61,3 @@ export default function ArticleForm() {
   );
 }
 
-/* DO ZROBIENIA
-x zrobić galerie obrazków z osobną tabelką 
-x połączyć ją z kotami
-- przy dodawaniu kota w forularzu włączać galerie obrazków i pozwalać wybrać jeden jako obrazek kota
--  */
