@@ -1,6 +1,5 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import { ArticlesType } from "~/server/db/schema";
 import { postArticle, postAnimals } from "~/server/queries";
 import { redirect } from "next/navigation";
@@ -61,3 +60,9 @@ export default function ArticleForm() {
   );
 }
 
+/*
+dodaj ten fajny edytor tekstu zainstaluj go
+zrób żeby bazodano trzymało ten tekst
+w wyświetlaniu artykuły dodaj wyświetlanie tego tekstu specjalnego
+posprzątaj troche
+*/
