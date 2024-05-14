@@ -106,6 +106,16 @@ export enum AnimalGenders {
   OTHER = "Other",
 }
 
+export enum AnimalTypes {
+  CAT = "cat",
+  DOG = "dog",
+  BIRD = "bird",
+  LIZARD = "lizard",
+  RAT = "rat",
+  FROG = "frog",
+  OTHER = "other",
+}
+
 export const insertAnimalsSchema = createInsertSchema(animals);
 
 export type AnimalsType = typeof animals.$inferInsert;

@@ -3,10 +3,15 @@ export const dynamic = "force-dynamic";
 import { animalImages } from "~/server/db/schema";
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
-import { getCats, getHealthIssues } from "~/server/queries";
+import {
+  getAnimals,
+  getDogs,
+  getHealthIssues,
+  getOtherAnimals,
+} from "~/server/queries";
 
-export default async function Cats() {
-  const allCats = await getCats();
+export default async function Others() {
+  const allAnimals = await getOtherAnimals();
   const healthIssues = await getHealthIssues();
 
   return (
@@ -15,18 +20,18 @@ export default async function Cats() {
 
       <div className="w-5/6 bg-pink-900">
         <div className="mt-44 p-6 text-center text-5xl font-semibold text-white">
-          Meet our wonderful cats!
+          Meet our wonderful pets!
         </div>
         <div className="p-6 text-center text-xl font-medium text-white">
           Every one of them is ready for a new home. Will you be their new
           friend?
         </div>
         <div className="mb-16 flex flex-wrap justify-center gap-8 p-6">
-          {allCats.map((cat) => {
+          {allAnimals.map((animal) => {
             return (
               <AnimalCard
-                key={cat.id}
-                animal={cat}
+                key={animal.id}
+                animal={animal}
                 healthIssues={healthIssues}
               />
             );

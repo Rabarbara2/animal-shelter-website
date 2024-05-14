@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
-import { AnimalGenders, AnimalsType } from "~/server/db/schema";
+import { AnimalGenders, AnimalTypes, AnimalsType } from "~/server/db/schema";
 import {
   asignImagetoAnimal,
   postAnimals,
@@ -67,7 +67,7 @@ export default function FormTest({ images }: FormTestProps) {
             <input
               autoComplete="off"
               defaultValue=""
-              minLength={7}
+              minLength={2}
               required
               about="miau"
               {...register("name", {})}
@@ -76,11 +76,15 @@ export default function FormTest({ images }: FormTestProps) {
           </div>
           <div className="w-full">
             <div>type:</div>
-            <input
-              defaultValue=""
-              {...register("type", {})}
-              className="  w-full p-1 text-lg"
-            />
+            <select {...register("type", {})} className=" w-full p-1 text-lg ">
+              <option value={AnimalTypes.CAT}>Cat</option>
+              <option value={AnimalTypes.DOG}>Dog</option>
+              <option value={AnimalTypes.BIRD}>Bird</option>
+              <option value={AnimalTypes.LIZARD}>Lizard</option>
+              <option value={AnimalTypes.RAT}>Rat</option>
+              <option value={AnimalTypes.FROG}>Frog</option>
+              <option value={AnimalTypes.OTHER}>Other</option>
+            </select>
           </div>
 
           <div className="w-full">

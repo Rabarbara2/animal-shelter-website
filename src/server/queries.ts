@@ -1,7 +1,7 @@
 "use server";
 "server only";
 
-import { eq } from "drizzle-orm";
+import { and, eq, ne } from "drizzle-orm";
 import { db } from "./db";
 import { articles, animals, animalImages } from "./db/schema";
 import type { ArticlesType, AnimalsType } from "./db/schema";
@@ -36,6 +36,34 @@ export async function getAnimals() {
   });
 
   return animals;
+}
+
+export async function getCats() {
+  const cats = await db.query.animals.findMany({
+    where: eq(animals.type, "cat"),
+    with: { animalHealthRecords: true, animalImages: true },
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  return cats;
+}
+export async function getDogs() {
+  const dogs = await db.query.animals.findMany({
+    where: eq(animals.type, "dog"),
+    with: { animalHealthRecords: true, animalImages: true },
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  return dogs;
+}
+export async function getOtherAnimals() {
+  const others = await db.query.animals.findMany({
+    where: and(ne(animals.type, "dog"), ne(animals.type, "cat")),
+    with: { animalHealthRecords: true, animalImages: true },
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  return others;
 }
 
 export async function getAnimalImages() {
