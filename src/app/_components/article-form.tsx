@@ -1,13 +1,17 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ArticlesType } from "~/server/db/schema";
 import { postArticle, postAnimals } from "~/server/queries";
 import { redirect } from "next/navigation";
 import React from "react";
+import "@uiw/react-md-editor/markdown-editor.css";
+import "@uiw/react-markdown-preview/markdown.css";
+import dynamic from "next/dynamic";
 
 export default function ArticleForm() {
   const {
     register,
+    control,
     handleSubmit,
     watch,
     reset,
@@ -23,7 +27,9 @@ export default function ArticleForm() {
       redirect("/");
     }
   }, [isSubmitSuccessful, reset]);
-
+  const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
+    ssr: false,
+  });
   return (
     <div className="flex w-5/6 items-center justify-center">
       <form
@@ -48,10 +54,12 @@ export default function ArticleForm() {
           />
         </div>
         <div>Content:</div>
+
         <div>
-          <textarea
-            {...register("text", {})}
-            className="  h-auto w-2/3 p-1 text-lg"
+          <Controller
+            control={control}
+            name="text"
+            render={({ field }) => <MDEditor {...field} />}
           />
         </div>
         <input type="submit" value="submit" className="bg-purple-400 p-5" />

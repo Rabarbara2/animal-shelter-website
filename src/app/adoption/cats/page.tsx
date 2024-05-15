@@ -4,6 +4,7 @@ import { animalImages } from "~/server/db/schema";
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
 import { getCats, getHealthIssues } from "~/server/queries";
+import Markdown from "~/app/_components/markdown";
 
 export default async function Cats() {
   const allCats = await getCats();
@@ -17,6 +18,7 @@ export default async function Cats() {
         <div className="mt-44 p-6 text-center text-5xl font-semibold text-white">
           Meet our wonderful cats!
         </div>
+        <Markdown />
         <div className="p-6 text-center text-xl font-medium text-white">
           Every one of them is ready for a new home. Will you be their new
           friend?
