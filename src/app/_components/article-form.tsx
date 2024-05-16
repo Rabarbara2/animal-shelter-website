@@ -69,8 +69,8 @@ export default function ArticleForm() {
 }
 
 /*
-dodaj ten fajny edytor tekstu zainstaluj go
-zrób żeby bazodano trzymało ten tekst
+dodaj ten fajny edytor tekstu zainstaluj go [X]
+zrób żeby bazodano trzymało ten tekst [X]
 w wyświetlaniu artykuły dodaj wyświetlanie tego tekstu specjalnego
 posprzątaj troche
 */
