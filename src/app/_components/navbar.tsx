@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoHeader from "../assets/logo-header";
+import LoginIcon from "../assets/login";
 export default function Navbar() {
   return (
     <div className="absolute z-10  flex h-32 w-5/6 items-center justify-between bg-zinc-900 opacity-80">
@@ -30,9 +31,15 @@ export default function Navbar() {
         <Link
           href={"https://zrzutka.pl/drugie-zycie-dla-malej"}
           target="_blank"
-          className="mr-8 flex h-fit px-1 text-lg font-medium text-white hover:text-pink-600 active:text-pink-700"
+          className=" flex h-fit px-1 text-lg font-medium text-white hover:text-pink-600 active:text-pink-700"
         >
           Donate
+        </Link>
+        <Link
+          href={"/login"}
+          className="mr-2 flex h-fit px-1 pt-1 text-lg  font-medium text-white hover:text-pink-600 active:text-pink-700"
+        >
+          <LoginIcon />
         </Link>
       </div>
     </div>
