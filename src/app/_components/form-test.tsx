@@ -17,6 +17,7 @@ import { UploadButton, UploadDropzone } from "../utils/uploadthing";
 import Buttons from "./buttons";
 import FemaleSymbol from "../assets/female-symbol";
 import TrashBinIcon from "../assets/trash-bin";
+import Link from "next/link";
 
 type FormTestProps = {
   images: ImagesResponse;
@@ -58,7 +59,7 @@ export default function FormTest({ images }: FormTestProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-5/6 flex-col items-center bg-slate-500 p-6"
+      className="flex w-5/6 flex-col items-center rounded-xl bg-slate-500 p-6"
     >
       <div className="flex w-full flex-row justify-between gap-2 p-6 text-lg">
         <div className="basis-1/2">
@@ -186,12 +187,20 @@ export default function FormTest({ images }: FormTestProps) {
           );
         })}
       </div>
-      <input
-        type="submit"
-        disabled={isSubmitting}
-        className="w-1/5 cursor-pointer rounded bg-lime-500 p-3 text-2xl font-medium tracking-wide disabled:bg-slate-500"
-        value="submit"
-      />
+      <div className="abs relative flex w-full flex-col items-center justify-center">
+        <Link
+          href={"/employees"}
+          className="absolute left-0 w-min self-start text-slate-50 hover:text-pink-300"
+        >
+          back
+        </Link>
+        <input
+          type="submit"
+          disabled={isSubmitting}
+          className="w-1/5 min-w-fit cursor-pointer rounded bg-lime-500 p-3 text-2xl font-medium tracking-wide disabled:bg-slate-500"
+          value="submit"
+        />
+      </div>
     </form>
   );
 }

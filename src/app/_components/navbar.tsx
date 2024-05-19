@@ -36,7 +36,7 @@ export default function Navbar() {
           Donate
         </Link>
         <Link
-          href={"/login"}
+          href={"/employees"}
           className="mr-2 flex h-fit px-1 pt-1 text-lg  font-medium text-white hover:text-pink-600 active:text-pink-700"
         >
           <LoginIcon />
