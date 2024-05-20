@@ -7,6 +7,7 @@ import React from "react";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 export default function ArticleForm() {
   const {
@@ -31,10 +32,10 @@ export default function ArticleForm() {
     ssr: false,
   });
   return (
-    <div className="flex w-5/6 items-center justify-center">
+    <div className="flex w-5/6 flex-col items-center rounded-xl bg-slate-500 p-6">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-1/2 flex-col gap-2"
+        className="flex w-full flex-col gap-4"
       >
         <div>
           <div>category:</div>
@@ -55,22 +56,27 @@ export default function ArticleForm() {
         </div>
         <div>Content:</div>
 
-        <div>
+        <div data-color-mode="light">
           <Controller
             control={control}
             name="text"
             render={({ field }) => <MDEditor {...field} />}
           />
         </div>
-        <input type="submit" value="submit" className="bg-purple-400 p-5" />
+        <div className="abs relative flex w-full flex-col items-center justify-center">
+          <Link
+            href={"/employees"}
+            className="absolute left-0 w-min self-start text-slate-50 hover:text-pink-300"
+          >
+            back
+          </Link>
+          <input
+            type="submit"
+            value="submit"
+            className="rounded bg-purple-400 p-5 hover:cursor-pointer "
+          />
+        </div>
       </form>
     </div>
   );
 }
-
-/*
-dodaj ten fajny edytor tekstu zainstaluj go [X]
-zrób żeby bazodano trzymało ten tekst [X]
-w wyświetlaniu artykuły dodaj wyświetlanie tego tekstu specjalnego
-posprzątaj troche
-*/

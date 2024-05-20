@@ -28,10 +28,8 @@ export default async function Aboutus() {
       <div className="w-5/6 overflow-hidden bg-pink-900 ">
         <Triangle fill="white" className="brightness-[70%]" />
       </div>
-      <ArticleForm />
-      <FormTest images={images} />
       <div className="h-96 w-5/6 bg-pink-900 p-12 text-lg text-white">
-        At [Animal Shelter Name], we believe that every life is precious and
+        At our animal shelter, we believe that every life is precious and
         deserving of love and care. Our dedicated team of staff and volunteers
         work around the clock to ensure that each animal that comes through our
         doors receives the attention, medical care, and support they need to
