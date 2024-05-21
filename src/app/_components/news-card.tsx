@@ -13,7 +13,8 @@ type NewsCardProps = {
 };
 
 export default function NewsCard({ category, createdAt, text }: NewsCardProps) {
-  const [isActive, setIsActive] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
   return (
     <div className="relative flex h-fit w-5/6 flex-col gap-4 rounded-xl bg-red-50 p-6 shadow lg:flex-row lg:items-stretch">
       <Image
@@ -34,9 +35,22 @@ export default function NewsCard({ category, createdAt, text }: NewsCardProps) {
                 day: "numeric",
               })}
             </div>
-            <div />
           </div>
-          <Markdown remarkPlugins={[remarkGfm]}>{text}</Markdown>
+          <div
+            className={`transition-all duration-700 ease-in-out ${!expanded ? "max-h-[200px] overflow-hidden" : "max-h-[6000px]"}`}
+          >
+            <Markdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: (props) => <h1 {...props} className="py-2 text-3xl" />,
+                h2: (props) => <h1 {...props} className="py-1 text-xl" />,
+                h3: (props) => <h1 {...props} className="py-1 text-lg " />,
+                p: (props) => <h1 {...props} className="mr-10 text-justify" />,
+              }}
+            >
+              {text}
+            </Markdown>
+          </div>
 
           {/* <div
             dangerouslySetInnerHTML={{
@@ -48,10 +62,10 @@ export default function NewsCard({ category, createdAt, text }: NewsCardProps) {
         </div>
 
         <button
-          onClick={() => setIsActive(!isActive)}
+          onClick={() => setExpanded((prev) => !prev)}
           className="h-16 w-fit cursor-pointer select-none justify-center self-end rounded-xl bg-pink-950 p-5 text-center text-xl font-medium text-white shadow"
         >
-          {isActive ? "Close" : "Read more"}
+          {expanded ? "Close" : "Read more"}
         </button>
       </div>
     </div>
