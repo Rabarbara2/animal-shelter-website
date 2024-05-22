@@ -1,16 +1,11 @@
 export const dynamic = "force-dynamic";
 
-import obrazek from "../assets/animals.jpg";
-import Navbar from "../_components/navbar";
 import Image from "next/image";
+import Navbar from "../_components/navbar";
+import obrazek from "../assets/animals.jpg";
 import Triangle from "../assets/triangle";
 
-import FormTest from "../_components/form-test";
-import ArticleForm from "../_components/article-form";
-import { getAnimalImages } from "~/server/queries";
-
 export default async function Aboutus() {
-  const images = await getAnimalImages();
   return (
     <div className="flex flex-col items-center bg-zinc-800">
       <Navbar />

@@ -1,13 +1,9 @@
 import Image from "next/image";
-import MaleSymbol from "../assets/male-symbol";
-import FemaleSymbol from "../assets/female-symbol";
 import Link from "next/link";
-import type {
-  AnimalsResponse,
-  HealthIssueResponse,
-  ImagesResponse,
-} from "~/server/queries";
 import { AnimalGenders } from "~/server/db/schema";
+import type { AnimalsResponse, HealthIssueResponse } from "~/server/queries";
+import FemaleSymbol from "../assets/female-symbol";
+import MaleSymbol from "../assets/male-symbol";
 
 type AnimalCardProps = {
   animal: AnimalsResponse["0"];

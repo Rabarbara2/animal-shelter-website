@@ -1,23 +1,19 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
 import Image from "next/image";
-import { AnimalGenders, AnimalTypes, AnimalsType } from "~/server/db/schema";
-import {
-  asignImagetoAnimal,
-  postAnimals,
-  getAnimalImages,
-  ImagesResponse,
-  deleteImage,
-} from "~/server/queries";
 import { redirect, useRouter } from "next/navigation";
 import React from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { AnimalGenders, AnimalTypes, AnimalsType } from "~/server/db/schema";
+import {
+  ImagesResponse,
+  asignImagetoAnimal,
+  deleteImage,
+  postAnimals,
+} from "~/server/queries";
 
-import { OurFileRouter } from "../api/uploadthing/core";
-import { UploadButton, UploadDropzone } from "../utils/uploadthing";
-import Buttons from "./buttons";
-import FemaleSymbol from "../assets/female-symbol";
-import TrashBinIcon from "../assets/trash-bin";
 import Link from "next/link";
+import TrashBinIcon from "../assets/trash-bin";
+import { UploadDropzone } from "../utils/uploadthing";
 
 type FormTestProps = {
   images: ImagesResponse;
@@ -170,12 +166,12 @@ export default function FormTest({ images }: FormTestProps) {
                 className="absolute m-2 scale-150"
               />
               <TrashBinIcon
-                className="absolute right-0 m-2 h-6 fill-red-500 font-bold"
+                className="absolute right-0 m-2 h-6 fill-red-500 font-bold hover:cursor-pointer"
                 onClick={async () => {
                   await deleteImage(image.id);
                   router.refresh();
                 }}
-              ></TrashBinIcon>
+              />
               <Image
                 src={image.url}
                 alt="obrazek"

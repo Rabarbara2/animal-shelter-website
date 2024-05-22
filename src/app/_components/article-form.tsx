@@ -1,22 +1,22 @@
 "use client";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ArticlesType } from "~/server/db/schema";
-import { postArticle, postAnimals } from "~/server/queries";
-import { redirect } from "next/navigation";
-import React from "react";
-import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import "@uiw/react-md-editor/markdown-editor.css";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import React from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { ArticlesType } from "~/server/db/schema";
+import { postArticle } from "~/server/queries";
 
 export default function ArticleForm() {
   const {
     register,
     control,
     handleSubmit,
-    watch,
+
     reset,
-    formState: { isSubmitting, isSubmitSuccessful },
+    formState: { isSubmitSuccessful },
   } = useForm<ArticlesType>();
   const onSubmit: SubmitHandler<ArticlesType> = async (data) => {
     await postArticle(data);

@@ -8,7 +8,7 @@ import doga from "../assets/Adopt.jpg";
 import cata from "../assets/Vol.jpg";
 import birda from "../assets/birb.jpg";
 import Image from "next/image";
-import MainPageAdopt from "../_components/main-page-adopt";
+
 export default async function Adoption() {
   return (
     <main className="flex min-h-screen justify-center bg-zinc-900">

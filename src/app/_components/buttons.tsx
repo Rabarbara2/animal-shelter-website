@@ -1,9 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import adopt from "../assets/Adopt.jpg";
+import donate from "../assets/Donate.jpg";
 import foster from "../assets/Foster.jpg";
 import vol from "../assets/Vol.jpg";
-import donate from "../assets/Donate.jpg";
-import Link from "next/link";
 
 const items = [
   {

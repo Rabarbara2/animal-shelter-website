@@ -1,4 +1,3 @@
-import Link from "next/link";
 import LogoHeader from "../assets/logo-header";
 export default function Footer() {
   return (

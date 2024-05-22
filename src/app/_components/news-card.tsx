@@ -1,10 +1,9 @@
 "use client";
 import Image from "next/image";
-import adopt from "../assets/Foster.jpg";
-import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import adopt from "../assets/Foster.jpg";
 
 type NewsCardProps = {
   category: string;

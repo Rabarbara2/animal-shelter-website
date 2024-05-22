@@ -1,14 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import { animalImages } from "~/server/db/schema";
+import { getHealthIssues, getOtherAnimals } from "~/server/queries";
 import AnimalCard from "../../_components/animal-card";
 import Navbar from "../../_components/navbar";
-import {
-  getAnimals,
-  getDogs,
-  getHealthIssues,
-  getOtherAnimals,
-} from "~/server/queries";
 
 export default async function Others() {
   const allAnimals = await getOtherAnimals();
