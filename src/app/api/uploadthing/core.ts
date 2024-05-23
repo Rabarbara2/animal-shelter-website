@@ -1,6 +1,4 @@
-import { revalidatePath } from "next/cache";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
-import { UploadThingError } from "uploadthing/server";
 import { animalImages, db } from "~/server/db/schema";
 
 const f = createUploadthing();

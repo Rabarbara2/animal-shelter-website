@@ -1,21 +1,16 @@
-import { drizzle } from "drizzle-orm/vercel-postgres";
 import { sql } from "@vercel/postgres";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { relations } from "drizzle-orm";
 import {
-  pgTable,
+  date,
+  integer,
+  pgTableCreator,
   serial,
   text,
   timestamp,
-  pgTableCreator,
-  uniqueIndex,
-  bigint,
   varchar,
-  boolean,
-  numeric,
-  date,
-  integer,
 } from "drizzle-orm/pg-core";
-import { relations } from "drizzle-orm";
+import { drizzle } from "drizzle-orm/vercel-postgres";
+import { createInsertSchema } from "drizzle-zod";
 
 export const db = drizzle(sql);
 
