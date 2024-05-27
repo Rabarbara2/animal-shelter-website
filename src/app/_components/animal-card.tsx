@@ -4,6 +4,7 @@ import { AnimalGenders } from "~/server/db/schema";
 import type { AnimalsResponse, HealthIssueResponse } from "~/server/queries";
 import FemaleSymbol from "../assets/female-symbol";
 import MaleSymbol from "../assets/male-symbol";
+import NonbinarySymbol from "../assets/nonbinary-symbol";
 
 type AnimalCardProps = {
   animal: AnimalsResponse["0"];
@@ -33,10 +34,14 @@ export default function AnimalCard({
       <div className="flex items-center justify-center">
         <div className=" p-4 text-2xl font-semibold">{name}</div>
         <div>
-          {gender === AnimalGenders.MALE ? (
+          {gender === AnimalGenders.MALE && (
             <MaleSymbol className="h-8 w-8 bg-clip-content fill-blue-400" />
-          ) : (
+          )}
+          {gender === AnimalGenders.FEMALE && (
             <FemaleSymbol className=" h-10 w-10 bg-clip-content fill-pink-400" />
+          )}
+          {gender === AnimalGenders.OTHER && (
+            <NonbinarySymbol className=" h-10 w-10 bg-clip-content fill-violet-400" />
           )}
         </div>
         <div className="flex min-h-[40px] justify-center">
