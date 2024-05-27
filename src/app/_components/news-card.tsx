@@ -15,7 +15,7 @@ export default function NewsCard({ category, createdAt, text }: NewsCardProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="relative flex h-fit w-5/6 flex-col gap-4 rounded-xl bg-red-50 p-6 shadow lg:flex-row lg:items-stretch">
+    <div className="relative flex h-fit w-full flex-col gap-4 rounded-xl bg-red-50 p-6 shadow lg:flex-row lg:items-stretch">
       <Image
         src={adopt}
         alt="animal"

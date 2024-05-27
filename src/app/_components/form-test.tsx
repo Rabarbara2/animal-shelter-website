@@ -48,7 +48,7 @@ export default function FormTest({ images }: FormTestProps) {
   React.useEffect(() => {
     if (isSubmitSuccessful) {
       reset();
-      redirect("/");
+      redirect("/employees");
     }
   }, [isSubmitSuccessful, reset]);
 

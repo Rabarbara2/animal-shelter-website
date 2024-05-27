@@ -11,7 +11,7 @@ export default async function Adoption() {
     <main className="flex min-h-screen justify-center bg-zinc-900">
       <Navbar />
 
-      <div className="flex min-h-screen w-5/6 flex-col bg-pink-900">
+      <div className="flex min-h-screen w-5/6 flex-col items-center bg-pink-900">
         <div className="p-10 pt-48 text-white">
           <div className="text-4xl font-medium ">Adoption</div>
           <div className="pt-6">
@@ -22,7 +22,7 @@ export default async function Adoption() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 grid-rows-2 p-4">
+        <div className="grid w-11/12 grid-cols-3 grid-rows-2 rounded-xl bg-pink-950 p-4">
           <div className="p-6 text-white">
             <div className="text-2xl">Prepare Your Home</div>
             <div className="pt-4">
@@ -75,7 +75,7 @@ export default async function Adoption() {
           </div>
         </div>
 
-        <div className="p-10 text-4xl font-medium text-white">
+        <div className="w-full p-10 text-4xl font-medium text-white">
           See the animals currently available for adoption:
         </div>
 
@@ -84,7 +84,7 @@ export default async function Adoption() {
             href={"/adoption/dogs"}
             className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
           >
-            <div className="p-2 text-4xl font-semibold ">Dogs</div>
+            <div className="p-2 text-3xl font-semibold ">Dogs</div>
             <Image
               src={doga}
               alt="animal"
@@ -99,7 +99,7 @@ export default async function Adoption() {
             href={"/adoption/cats"}
             className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
           >
-            <div className="p-2 text-4xl font-semibold ">Cats</div>
+            <div className="p-2 text-3xl font-semibold ">Cats</div>
             <Image
               src={cata}
               alt="animal"
@@ -114,7 +114,7 @@ export default async function Adoption() {
             href={"/adoption/others"}
             className="flex h-fit w-[30%] flex-col items-center rounded-xl bg-red-50 p-6 shadow hover:bg-white  hover:text-pink-700"
           >
-            <div className="p-2 text-4xl font-semibold ">Other pets</div>
+            <div className="p-2 text-3xl font-semibold ">Other pets</div>
             <Image
               src={birda}
               alt="animal"
