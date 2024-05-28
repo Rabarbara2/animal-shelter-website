@@ -13,11 +13,11 @@ type AnimalCardProps = {
 
 export default function AnimalCard({
   healthIssues,
-  animal: { gender, animalHealthRecords, name, animalImages },
+  animal: { gender, animalHealthRecords, name, animalImages, id },
 }: AnimalCardProps) {
   return (
     <Link
-      href={"/"}
+      href={`/adoption/cats/${id}`}
       className="flex w-64 flex-col items-center rounded-3xl bg-red-50 
        shadow-md shadow-slate-800/30 transition-all duration-200 ease-in-out hover:-translate-y-2 hover:bg-white "
     >

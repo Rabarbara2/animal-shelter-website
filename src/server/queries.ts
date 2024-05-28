@@ -47,6 +47,18 @@ export async function getCats() {
 
   return cats;
 }
+
+export async function getAnimal(id: number) {
+  const animal = await db.query.animals.findFirst({
+    where: eq(animals.id, id),
+    with: {
+      animalHealthRecords: true,
+      animalImages: true,
+    },
+  });
+
+  return animal;
+}
 export async function getDogs() {
   const dogs = await db.query.animals.findMany({
     where: eq(animals.type, "dog"),
