@@ -43,7 +43,7 @@ export default async function Aboutus() {
   return (
     <div className="flex flex-col items-center bg-zinc-800">
       <Navbar />
-      <div className=" relative flex w-5/6 flex-col items-center justify-center overflow-hidden bg-pink-800 pt-32">
+      <div className=" relative flex w-5/6 flex-col items-center justify-center overflow-hidden bg-pink-900 pt-32">
         <div className="  p-12 text-3xl font-medium text-white">
           About Us
           <div className="pt-6 text-lg font-normal">
@@ -56,7 +56,7 @@ export default async function Aboutus() {
             community.
           </div>
         </div>
-        <div className="  w-full p-12 text-3xl font-medium text-white">
+        <div className="  w-11/12 rounded-xl bg-pink-950 p-12 text-3xl font-medium text-white">
           Meet the team
           <div className="flex w-full justify-between p-12 font-normal">
             <div className="flex flex-col items-center gap-6 text-2xl">
