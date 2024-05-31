@@ -2,6 +2,14 @@ import { notFound } from "next/navigation";
 import Navbar from "~/app/_components/navbar";
 import { getAnimal } from "~/server/queries";
 import Image from "next/image";
+import { differenceInYears, differenceInMonths } from "date-fns";
+
+function getCatAge(birthDate: Date) {
+  const today = new Date();
+  const years = differenceInYears(today, birthDate);
+  const months = differenceInMonths(today, birthDate) % 12;
+  return { years, months };
+}
 
 export default async function Page({ params }: { params: { id: number } }) {
   const cat = await getAnimal(params.id);
@@ -10,12 +18,9 @@ export default async function Page({ params }: { params: { id: number } }) {
     return notFound();
   }
 
-  const now = new Date();
   const dateOfBirth = new Date(cat.dateOfBirth);
 
-  const age = Math.round(
-    (now.getTime() - dateOfBirth.getTime()) / (1000 * 3600 * 24),
-  );
+  const age = getCatAge(dateOfBirth);
 
   return (
     <div className="flex min-h-screen flex-col items-center bg-slate-800">
@@ -37,7 +42,10 @@ export default async function Page({ params }: { params: { id: number } }) {
             <div>• race: {cat.race}</div>
             <div>• fur length: {cat.furLength}</div>
             <div>• colour: {cat.colour}</div>
-            <div>• age: {age} days</div>
+            <div>
+              • age: {age.years ? age.years + " years" : ""}{" "}
+              {age.months ? age.months + " months" : ""}
+            </div>
           </div>
         </div>
       </div>

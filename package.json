@@ -26,6 +26,7 @@
     "@vercel/postgres": "^0.8.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "date-fns": "^3.6.0",
     "drizzle-orm": "^0.29.4",
     "drizzle-zod": "^0.5.1",
     "next": "^14.1.0",
