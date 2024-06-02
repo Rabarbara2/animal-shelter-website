@@ -45,14 +45,17 @@ export default async function Page({ params }: { params: { id: number } }) {
               <div>• fur length: {cat.furLength}</div>
               <div>• colour: {cat.colour}</div>
               <div>
-                • age: {!!age.years && age.years + " years"}
+                • age: {!!age.years && age.years + " years "}
                 {!!age.months && age.months + " months"}
                 {!age.years && !age.months && "< 1 month"}
               </div>
             </div>
           </div>
         </div>
-        <Link href={"/adoption/cats"} className="w-fit p-6 text-lg text-white">
+        <Link
+          href={"/adoption"}
+          className="w-fit p-6 text-lg text-white hover:text-pink-400 "
+        >
           go back
         </Link>
       </div>
