@@ -5,21 +5,24 @@ import type { AnimalsResponse, HealthIssueResponse } from "~/server/queries";
 import FemaleSymbol from "../assets/female-symbol";
 import MaleSymbol from "../assets/male-symbol";
 import NonbinarySymbol from "../assets/nonbinary-symbol";
+import { Url } from "next/dist/shared/lib/router/router";
 
 type AnimalCardProps = {
   animal: AnimalsResponse["0"];
   healthIssues: HealthIssueResponse;
+  href: Url;
 };
 
 export default function AnimalCard({
   healthIssues,
-  animal: { gender, animalHealthRecords, name, animalImages, id },
+  animal: { gender, animalHealthRecords, name, animalImages },
+  href,
 }: AnimalCardProps) {
   return (
     <Link
-      href={`/adoption/cats/${id}`}
+      href={href}
       className="flex w-64 flex-col items-center rounded-3xl bg-red-50 
-       shadow-md shadow-slate-800/30 transition-all duration-200 ease-in-out hover:-translate-y-2 hover:bg-white "
+       shadow-md shadow-slate-800/30 transition-all duration-200 ease-in-out hover:-translate-y-2 hover:bg-white"
     >
       <Image
         src={

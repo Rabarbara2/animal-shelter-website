@@ -27,6 +27,7 @@ export default async function Dogs() {
                 key={dog.id}
                 animal={dog}
                 healthIssues={healthIssues}
+                href={`/adoption/dogs/${dog.id}`}
               />
             );
           })}
