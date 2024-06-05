@@ -102,6 +102,18 @@ export async function postAnimals(params: AnimalsType) {
 
   return result;
 }
+
+export async function updateAnimals(params: AnimalsType) {
+  // Assuming db is your database connection object
+  const [result] = await db
+    .update(animals)
+    .set(params)
+    .where(eq(animals.id, params.id!))
+    .returning();
+
+  return result;
+}
+
 export async function postArticle(params: ArticlesType) {
   await db.insert(articles).values({
     ...params,
