@@ -5,6 +5,7 @@ import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { AnimalGenders, AnimalTypes, AnimalsType } from "~/server/db/schema";
 import {
+  AnimalResponse,
   ImagesResponse,
   asignImagetoAnimal,
   deleteImage,
@@ -17,14 +18,16 @@ import { UploadDropzone } from "../utils/uploadthing";
 
 type FormTestProps = {
   images: ImagesResponse;
+  animal: AnimalResponse;
 };
 
 type FormType = AnimalsType & {
   imageId: number;
 };
 
-export default function EditAnimalForm({ images }: FormTestProps) {
+export default function EditAnimalForm({ images, animal }: FormTestProps) {
   const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -35,12 +38,15 @@ export default function EditAnimalForm({ images }: FormTestProps) {
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
     const { imageId, dateOfBirth, ...animalData } = data;
+    console.log(data);
     const addedCat = await updateAnimals({
       ...animalData,
       dateOfBirth: new Date(dateOfBirth).toJSON(),
+      id: animal.id,
     });
+    console.log(addedCat);
     if (addedCat?.id) {
-      await asignImagetoAnimal(addedCat.id, imageId); // TODO
+      await asignImagetoAnimal(addedCat.id, imageId);
     }
   };
   console.log(watch("dateOfBirth"), new Date(watch("dateOfBirth")).toJSON());
@@ -63,7 +69,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
             <div>name:</div>
             <input
               autoComplete="off"
-              defaultValue=""
+              defaultValue={animal.name}
               minLength={2}
               required
               about="miau"
@@ -73,7 +79,11 @@ export default function EditAnimalForm({ images }: FormTestProps) {
           </div>
           <div className="w-full">
             <div>type:</div>
-            <select {...register("type", {})} className=" w-full p-1 text-lg ">
+            <select
+              {...register("type", {})}
+              className=" w-full p-1 text-lg "
+              defaultValue={animal.type}
+            >
               <option value={AnimalTypes.CAT}>Cat</option>
               <option value={AnimalTypes.DOG}>Dog</option>
               <option value={AnimalTypes.BIRD}>Bird</option>
@@ -88,7 +98,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
             <div>colour:</div>
 
             <input
-              defaultValue=""
+              defaultValue={animal.colour}
               {...register("colour", {})}
               className=" w-full p-1 text-lg "
             />
@@ -98,6 +108,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
             <div>gender: </div>
 
             <select
+              defaultValue={animal.gender ?? undefined}
               {...register("gender", {})}
               className=" w-full p-1 text-lg "
             >
@@ -110,6 +121,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
             <div>date of birth: </div>
 
             <input
+              defaultValue={""}
               type="month"
               {...register("dateOfBirth", {})}
               className=" w-full p-1 text-lg"
@@ -119,6 +131,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
           <div className="w-full">
             <div>fur length: </div>
             <select
+              defaultValue={animal.furLength ?? undefined}
               {...register("furLength", {})}
               className=" w-full p-1 text-lg"
             >
@@ -133,7 +146,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
             <div>race: </div>
 
             <input
-              defaultValue=""
+              defaultValue={animal.race}
               {...register("race", {})}
               className="w-full p-1 text-lg"
             />
@@ -160,11 +173,13 @@ export default function EditAnimalForm({ images }: FormTestProps) {
           return (
             <label key={image.id} className="relative w-fit">
               <input
+                defaultChecked={animal?.animalImages.id === image.id}
                 type="radio"
                 value={image.id}
                 {...register("imageId")}
                 className="absolute m-2 scale-150"
               />
+
               <TrashBinIcon
                 className="absolute right-0 m-2 h-6 fill-red-500 font-bold hover:cursor-pointer"
                 onClick={async () => {
@@ -172,6 +187,7 @@ export default function EditAnimalForm({ images }: FormTestProps) {
                   router.refresh();
                 }}
               />
+
               <Image
                 src={image.url}
                 alt="obrazek"
@@ -193,8 +209,8 @@ export default function EditAnimalForm({ images }: FormTestProps) {
         <input
           type="submit"
           disabled={isSubmitting}
-          className="w-1/5 min-w-fit cursor-pointer rounded bg-lime-500 p-3 text-2xl font-medium tracking-wide disabled:bg-slate-500"
-          value="submit"
+          className="w-1/5 min-w-fit cursor-pointer rounded bg-orange-500 p-3 text-2xl font-medium tracking-wide disabled:bg-slate-500"
+          value="edit"
         />
       </div>
     </form>

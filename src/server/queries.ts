@@ -57,6 +57,10 @@ export async function getAnimal(id: number) {
     },
   });
 
+  if (!animal) {
+    throw new Error("Animal not found");
+  }
+
   return animal;
 }
 export async function getDogs() {
@@ -88,6 +92,7 @@ export async function getAnimalImages() {
 }
 
 export type AnimalsResponse = Awaited<ReturnType<typeof getAnimals>>;
+export type AnimalResponse = Awaited<ReturnType<typeof getAnimal>>;
 export type ImagesResponse = Awaited<ReturnType<typeof getAnimalImages>>;
 export type HealthIssueResponse = Awaited<ReturnType<typeof getHealthIssues>>;
 
@@ -104,7 +109,6 @@ export async function postAnimals(params: AnimalsType) {
 }
 
 export async function updateAnimals(params: AnimalsType) {
-  // Assuming db is your database connection object
   const [result] = await db
     .update(animals)
     .set(params)

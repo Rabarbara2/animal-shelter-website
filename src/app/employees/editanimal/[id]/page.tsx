@@ -1,11 +1,16 @@
 import EditAnimalForm from "~/app/_components/edit-animal-form";
-import { getAnimalImages } from "~/server/queries";
+import { getAnimal, getAnimalImages } from "~/server/queries";
 
-export default async function EditAnimal() {
+export default async function EditAnimal({
+  params,
+}: {
+  params: { id: number };
+}) {
   const animalimages = await getAnimalImages();
+  const currentAnimal = await getAnimal(params.id);
   return (
     <div>
-      <EditAnimalForm images={animalimages} />
+      <EditAnimalForm images={animalimages} animal={currentAnimal} />
     </div>
   );
 }
