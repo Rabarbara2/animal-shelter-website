@@ -15,6 +15,7 @@ import {
 import Link from "next/link";
 import TrashBinIcon from "../assets/trash-bin";
 import { UploadDropzone } from "../utils/uploadthing";
+import { format } from "date-fns";
 
 type FormTestProps = {
   images: ImagesResponse;
@@ -34,7 +35,12 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
     watch,
     reset,
     formState: { isSubmitting, isSubmitSuccessful },
-  } = useForm<FormType>();
+  } = useForm<FormType>({
+    defaultValues: {
+      ...animal,
+      dateOfBirth: format(new Date(animal.dateOfBirth), "yyyy-MM"),
+    },
+  });
 
   const onSubmit: SubmitHandler<FormType> = async (data) => {
     const { imageId, dateOfBirth, ...animalData } = data;
@@ -58,6 +64,8 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
     }
   }, [isSubmitSuccessful, reset]);
 
+  console.log(animal.dateOfBirth);
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -69,7 +77,6 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
             <div>name:</div>
             <input
               autoComplete="off"
-              defaultValue={animal.name}
               minLength={2}
               required
               about="miau"
@@ -79,11 +86,7 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
           </div>
           <div className="w-full">
             <div>type:</div>
-            <select
-              {...register("type", {})}
-              className=" w-full p-1 text-lg "
-              defaultValue={animal.type}
-            >
+            <select {...register("type", {})} className=" w-full p-1 text-lg ">
               <option value={AnimalTypes.CAT}>Cat</option>
               <option value={AnimalTypes.DOG}>Dog</option>
               <option value={AnimalTypes.BIRD}>Bird</option>
@@ -98,7 +101,6 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
             <div>colour:</div>
 
             <input
-              defaultValue={animal.colour}
               {...register("colour", {})}
               className=" w-full p-1 text-lg "
             />
@@ -108,7 +110,6 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
             <div>gender: </div>
 
             <select
-              defaultValue={animal.gender ?? undefined}
               {...register("gender", {})}
               className=" w-full p-1 text-lg "
             >
@@ -118,10 +119,10 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
             </select>
           </div>
           <div className="w-full">
-            <div>date of birth: </div>
+            <label htmlFor="dateOfBirth">date of birth: </label>
 
             <input
-              defaultValue={""}
+              id="dateOfBirth"
               type="month"
               {...register("dateOfBirth", {})}
               className=" w-full p-1 text-lg"
@@ -131,7 +132,6 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
           <div className="w-full">
             <div>fur length: </div>
             <select
-              defaultValue={animal.furLength ?? undefined}
               {...register("furLength", {})}
               className=" w-full p-1 text-lg"
             >
@@ -145,11 +145,7 @@ export default function EditAnimalForm({ images, animal }: FormTestProps) {
           <div className="w-full">
             <div>race: </div>
 
-            <input
-              defaultValue={animal.race}
-              {...register("race", {})}
-              className="w-full p-1 text-lg"
-            />
+            <input {...register("race", {})} className="w-full p-1 text-lg" />
           </div>
         </div>
 

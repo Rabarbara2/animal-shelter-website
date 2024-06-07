@@ -6,7 +6,7 @@ export default function BackButton() {
   return (
     <div
       onClick={() => router.back()}
-      className="m-6 h-fit w-fit text-lg text-white hover:cursor-pointer hover:text-pink-400"
+      className=" h-fit w-fit text-lg text-white hover:cursor-pointer hover:text-pink-400"
     >
       go back
     </div>

@@ -52,7 +52,9 @@ export default async function Page({ params }: { params: { id: number } }) {
             </div>
           </div>
         </div>
-        <BackButton />
+        <div className="p-6">
+          <BackButton />
+        </div>
       </div>
     </div>
   );
