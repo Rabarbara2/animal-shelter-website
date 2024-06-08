@@ -3,6 +3,8 @@
 The goal of the project is to create a website that could be utilized by an animal shelter.
 The website is intended for use by both guests and employees.
 
+[The site can be visited here!](https://animal-shelter-website.vercel.app)
+
 ### Planned functionalities
 
 #### For guests:
