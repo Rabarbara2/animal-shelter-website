@@ -1,9 +1,7 @@
 "use client";
-import Image from "next/image";
 import { useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import adopt from "../assets/Foster.jpg";
 
 type NewsCardProps = {
   category: string;
@@ -16,11 +14,6 @@ export default function NewsCard({ category, createdAt, text }: NewsCardProps) {
 
   return (
     <div className="relative flex h-fit w-full flex-col gap-4 rounded-xl bg-red-50 p-6 shadow lg:flex-row lg:items-stretch">
-      <Image
-        src={adopt}
-        alt="animal"
-        className="h-64 w-auto rounded-xl object-cover object-top"
-      />
       <div className="flex flex-col justify-between gap-8">
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-3">

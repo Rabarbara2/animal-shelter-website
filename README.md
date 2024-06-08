@@ -22,5 +22,7 @@ The website is intended for use by both guests and employees.
 
 - basic news section
 - browsing cats
-- basic site design (it's bad)
+- basic site design
 - adding animals to database
+- adding news articles using markdown
+- editing animals
