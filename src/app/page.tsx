@@ -2,6 +2,7 @@ import { unstable_noStore as noStore } from "next/cache";
 import Buttons from "./_components/buttons";
 import Hero from "./_components/hero";
 import Navbar from "./_components/navbar";
+import { Analytics } from "@vercel/analytics/react";
 
 import MainPageAdopt from "./_components/main-page-adopt";
 
@@ -14,6 +15,7 @@ export default async function Home() {
   return (
     <main className=" min-h-screen bg-zinc-900">
       <div className=" flex flex-col items-center">
+        <Analytics />
         <Navbar />
         <Hero />
         <Buttons />
